@@ -1,0 +1,28 @@
+/*
+ * File: home-page.css
+ * Project: PHPDI
+ * File Created: Saturday, 8th June 2019 3:00:03 pm
+ * Author: Ivan Grigorov
+ * Contact:  ivangrigorov9 at gmail.com
+ * -----
+ * Last Modified: Saturday, 8th June 2019 6:11:25 pm
+ * Modified By: Ivan Grigorov
+ * -----
+ * License: MIT
+ */
+
+.home-option {
+    padding: 10%;
+    margin: 2%;
+
+}
+
+.img-menu {
+    margin: 2%;
+}
+
+.home-button-label {
+    margin-top: 5%;
+    text-align: center;
+    font-size: 18em
+}

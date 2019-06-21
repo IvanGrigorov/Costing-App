@@ -1,0 +1,51 @@
+<Page class="page"
+    navigatingTo="onNavigatingTo"  
+    xmlns="http://schemas.nativescript.org/tns.xsd"
+    xmlns:lv="nativescript-ui-listview">
+
+    <ActionBar class="action-bar">
+        <Label class="action-bar-title" text="Statistics"></Label>
+    </ActionBar>
+    <StackLayout width="100%" orientation="vertical">
+        <StackLayout width="100%" height="300px" orientation="horizontal">
+            <Label class="label-text" width="50%" text="{{ date }}" />
+            <ListPicker 
+                itemSelected="{{ onItemSelected }}"
+                loaded="onListPickerLoaded"
+                items="{{ dates }}"
+                selectedValue="{{ datesValue }}">
+            </ListPicker>
+        </StackLayout>
+        <StackLayout width="100%" height="300px" orientation="horizontal">
+            <Label class="label-text" width="50%" text="{{ label }}" />
+            <ListPicker 
+                itemSelected="{{ onItemSelected }}"
+                loaded="onListPickerLoaded"
+                items="{{ labels }}"
+                selectedValue="{{ labelsValue }}">
+            </ListPicker>
+        </StackLayout>
+        <StackLayout width="100%" orientation="vertical" backgroundColor="white">
+            <Label class="total-amount" height="100px" text="{{ 'Total amount: ' + maxSum }}" />
+            <Label class="total-amount" height="100px" text="{{ 'Total amount (Euros): ' + maxSumEuros }}" />
+            <Label class="total-amount" height="100px" text="{{ 'Total amount: (Dollars)' + maxSumDollars }}" />
+
+            <lv:RadListView swipeActions="true" itemSwipeProgressStarted="onSwipeCellStarted"  filteringFunction="{{ filteringFunc }}" items="{{ spendings }}" height="100%">
+                <lv:RadListView.itemTemplate >
+                    <StackLayout width="100%" orientation="horizontal" backgroundColor="white">
+                        <Image src="{{ img }}" width="40%"  stretch="aspectFill " class="img-menu"></Image>
+                        <StackLayout width="60%" orientation="vertical" backgroundColor="white">
+                            <Label textWrap="true" class="spending-item"  text="{{ for }}" />
+                            <Label class="spending-item"  text="{{ sum + ' ' + currency }}" />
+                            <Label class="spending-item"  text="{{ when}}" />
+                        </StackLayout>
+                    </StackLayout>
+                </lv:RadListView.itemTemplate>
+                <lv:RadListView.itemSwipeTemplate >
+                    <Label class="spending-item-centered"  text="Deleting..." />
+                </lv:RadListView.itemSwipeTemplate>
+            </lv:RadListView>
+        </StackLayout>
+    </StackLayout>
+
+</Page>

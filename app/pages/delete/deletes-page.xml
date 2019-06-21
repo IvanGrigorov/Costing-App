@@ -1,0 +1,33 @@
+<Page class="page"
+    navigatingTo="onNavigatingTo" 
+    xmlns="http://schemas.nativescript.org/tns.xsd">
+
+    <ActionBar class="action-bar">
+        <Label class="action-bar-title" text="Home"></Label>
+    </ActionBar>
+    <ScrollView orientation="vertical">
+        <StackLayout width="100%" orientation="vertical">
+            <StackLayout width="100%" height="auto" orientation="vertical">
+                <Label class="label-text" width="50%" text="{{ date }}" />
+                <ListPicker 
+                    itemSelected="{{ onItemSelected }}"
+                    loaded="onListPickerLoaded"
+                    items="{{ dates }}"
+                    selectedValue="{{ datesValue }}">
+                </ListPicker>
+                <Button tap='onDeleteByDateItemTap' class="btn btn-primary btn-active" id="button" text="Delete by date!" ></Button>
+            </StackLayout>
+            <StackLayout width="100%" height="auto" orientation="vertical">
+                <Label class="label-text" width="50%" text="{{ label }}" />
+                <ListPicker 
+                    itemSelected="{{ onItemSelected }}"
+                    loaded="onListPickerLoaded"
+                    items="{{ labels }}"
+                    selectedValue="{{ labelsValue }}">
+                </ListPicker>
+                <Button tap='onDeleteByLabelItemTap' class="btn btn-primary btn-active" id="button" text="Delete by label!" ></Button>
+            </StackLayout>
+            <Button tap='onDeleteByBothItemTap' class="btn btn-primary btn-active" id="button" text="Delete by both!" ></Button>
+        </StackLayout>
+    </ScrollView>
+</Page>

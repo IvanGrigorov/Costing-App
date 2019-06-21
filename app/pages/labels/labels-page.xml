@@ -1,0 +1,18 @@
+<Page class="page"
+    navigatingTo="onNavigatingTo"  
+    xmlns="http://schemas.nativescript.org/tns.xsd">
+
+    <ActionBar class="action-bar">
+        <Label class="action-bar-title" text="Labels"></Label>
+    </ActionBar>
+
+    <StackLayout width="100%" height="auto" orientation="vertical" backgroundColor="white">
+        <StackLayout width="100%" orientation="horizontal">
+            <Label class="new-spending-item" width="50%" text="{{ label }}" />
+            <TextField text="{{ labelValue }}" width="50%" hint="Enter Label" autocorrect="false"></TextField>
+        </StackLayout>
+        <Button tap='onSubmitItemTap' class="btn btn-primary btn-active" id="button" text="Save!" ></Button>
+
+    </StackLayout>
+
+</Page>

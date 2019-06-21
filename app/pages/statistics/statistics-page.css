@@ -1,0 +1,29 @@
+/*
+ * File: statistics-page.css
+ * Project: PHPDI
+ * File Created: Sunday, 9th June 2019 2:56:00 pm
+ * Author: Ivan Grigorov
+ * Contact:  ivangrigorov9 at gmail.com
+ * -----
+ * Last Modified: Tuesday, 18th June 2019 9:19:07 pm
+ * Modified By: Ivan Grigorov
+ * -----
+ * License: MIT
+ */
+.spending-item {
+    padding: 15px;
+    font-size: 15em;
+}
+
+.spending-item-centered {
+    vertical-align: middle; 
+}
+
+.label-text {
+    margin: 40px;
+}
+
+.total-amount { 
+    padding: 15px;
+    font-size: 15em
+}

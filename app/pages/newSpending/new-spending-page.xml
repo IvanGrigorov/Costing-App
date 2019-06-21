@@ -1,0 +1,49 @@
+<Page class="page"
+    navigatingTo="onNavigatingTo"  
+    xmlns="http://schemas.nativescript.org/tns.xsd">
+
+    <ActionBar class="action-bar">
+        <Label class="action-bar-title" text="Spendings"></Label>
+    </ActionBar>
+    <ScrollView orientation="vertical" row="1" col="2" width="100%">
+        <StackLayout width="100%" height="auto" orientation="vertical" backgroundColor="white">
+            <StackLayout width="100%" orientation="horizontal">
+                <Label class="new-spending-item" width="50%" text="{{ for }}" />
+                <TextField text="{{ forValue }}" width="50%" hint="Enter product" autocorrect="false"></TextField>
+            </StackLayout>
+            <StackLayout width="100%" orientation="horizontal">
+                <Label class="new-spending-item" width="50%" text="{{ category }}" />
+                <ListPicker 
+                    loaded="onListPickerLoaded"
+                    items="{{ categories }}"
+                    selectedValue="{{ categoryValue }}">
+                </ListPicker>        
+            </StackLayout>
+            <StackLayout width="100%" orientation="horizontal">
+                <Label class="new-spending-item" width="50%" text="{{ sum }}" />
+                <TextField keyboardType="number" text="{{ sumValue }}" width="50%" hint="Enter product" autocorrect="false"></TextField>
+            </StackLayout>
+            <StackLayout width="100%" orientation="horizontal">
+                <Label class="new-spending-item" width="50%" text="{{ currency }}" />
+                <ListPicker 
+                    loaded="onListPickerLoaded"
+                    items="{{ currencies }}"
+                    selectedValue="{{ currencyValue }}">
+                </ListPicker>        
+            </StackLayout>
+            <StackLayout width="100%" orientation="horizontal">
+                <Label class="new-spending-item" width="50%" text="{{ when }}" />
+                <TextField keyboardType="datetime" text="{{ whenValue }}" width="50%" hint="Enter product" autocorrect="false"></TextField>
+            </StackLayout>
+            <StackLayout visibility="{{ isLabelOptionVisible }}" width="100%" orientation="horizontal">
+                <Label class="new-spending-item" width="50%" text="{{ label }}" />
+                <ListPicker 
+                    loaded="onListPickerLoaded"
+                    items="{{ labels }}"
+                    selectedValue="{{ labelValue }}">
+                </ListPicker>        
+            </StackLayout>
+            <Button tap='onSubmitItemTap' class="btn btn-primary btn-active" id="button" text="Save!" ></Button>
+        </StackLayout>
+    </ScrollView>
+</Page>
