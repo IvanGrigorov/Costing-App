@@ -12,6 +12,7 @@
   "license": "SEE LICENSE IN <your-license-filename>",
   "repository": "<fill-your-repository-here>",
   "dependencies": {
+    "nativescript-local-notifications": "^3.2.2",
     "nativescript-sqlite": "^2.3.3",
     "nativescript-theme-core": "~1.0.4",
     "nativescript-ui-listview": "^6.3.2",

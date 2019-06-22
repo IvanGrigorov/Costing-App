@@ -31,7 +31,11 @@
                 <Label class="home-button-label" width="100%" height="100px" text="All Alerts"/>
                 <Image src="res://money" width="100%" height="auto" stretch="aspectFill " class="img-menu"></Image>
             </StackLayout>
-            <StackLayout marginTop="30px" class="home-option" col="0" row="3" width="48%" orientation="vertical" backgroundColor="#ADFF2F">
+            <StackLayout marginTop="30px" tap="onNotificationsTap" class="home-option" col="0" row="3" width="48%" orientation="vertical" backgroundColor="#ADFF2F">
+                <Label class="home-button-label" width="100%" height="100px" text="Notifications"/>
+                <Image src="res://money" width="100%" height="auto" stretch="aspectFill " class="img-menu"></Image>
+            </StackLayout>
+            <StackLayout marginTop="30px" class="home-option" col="1" row="3" width="48%" orientation="vertical" backgroundColor="#ADFF2F">
                 <Label class="home-button-label" width="100%" height="100px" text="{{ credits }}"/>
                 <Image src="res://money" width="100%" height="auto" stretch="aspectFill " class="img-menu"></Image>
             </StackLayout>

@@ -6,7 +6,7 @@ logic, and to set up your page’s data binding.
 
 const HomeViewModel = require("./home-view-model");
 const DbManager = require("../../db/DbManager");
-const { CREATE_SPENDINGS_TABLE, CREATE_LABEL_TABLE, CREATE_LABEL_TO_SPENDING_TABLE, CREATE_ALERTS_TABLE } = require("../../db/DbInitialScripts");
+const { CREATE_SPENDINGS_TABLE, CREATE_LABEL_TABLE, CREATE_LABEL_TO_SPENDING_TABLE, CREATE_ALERTS_TABLE, CREATE_NOTIFICATIONS_TABLE } = require("../../db/DbInitialScripts");
 const { isThereConnection } = require("./../../connectivity/connetctivity");
 const { getBGNCourse } = require("./../../http/getCurrencyCoureses");
 const { shouldWeUseCache } = require("./../../sharedSettings/settings");
@@ -58,6 +58,8 @@ function onNavigatingTo(args) {
             DbManagerInstance.executeQuery(db, CREATE_SPENDINGS_TABLE),
             DbManagerInstance.executeQuery(db, CREATE_LABEL_TABLE),
             DbManagerInstance.executeQuery(db, CREATE_ALERTS_TABLE),
+            DbManagerInstance.executeQuery(db, CREATE_NOTIFICATIONS_TABLE),
+
         ]
 
         Promise.all(dbPromisesArray).then(() => {
@@ -115,6 +117,12 @@ function onAllAlertsTap(args) {
     page.frame.navigate("pages/allAlerts/allAlerts-page");
 }
 
+function onNotificationsTap(args) {
+    const button = args.object;
+    const page = button.page;
+    page.frame.navigate("pages/notifications/notifications-page");
+}
+
 module.exports = {
     onNavigatingTo: onNavigatingTo,
     onNewSpendingTap: onNewSpendingTap,
@@ -122,5 +130,6 @@ module.exports = {
     onNewLabelsTap: onNewLabelsTap,
     onDeletesTap: onDeletesTap,
     onAlertsTap: onAlertsTap,
-    onAllAlertsTap: onAllAlertsTap
+    onAllAlertsTap: onAllAlertsTap,
+    onNotificationsTap: onNotificationsTap
 }

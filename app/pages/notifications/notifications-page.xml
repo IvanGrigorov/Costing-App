@@ -1,0 +1,44 @@
+<Page class="page"
+    navigatingTo="onNavigatingTo"  
+    xmlns="http://schemas.nativescript.org/tns.xsd"
+    xmlns:lv="nativescript-ui-listview">
+
+    <ActionBar class="action-bar">
+        <Label class="action-bar-title" text="Notifications"></Label>
+    </ActionBar>
+    <StackLayout orientation="vertical" width="100%">
+        <StackLayout width="100%" orientation="horizontal">
+            <Label class="new-spending-item" width="40%" text="Title" />
+            <TextField text="{{ title }}" width="60%" hint="Enter title" autocorrect="false"></TextField>
+        </StackLayout>
+        <StackLayout width="100%" orientation="horizontal">
+            <Label class="new-spending-item" width="40%" text="When: " />
+            <TimePicker time="{{ time }}" verticalAlignment="center" ></TimePicker>
+        </StackLayout>
+        <StackLayout width="100%" orientation="horizontal">
+            <Label class="new-spending-item" width="40%" text="Repeat at: " />
+            <ListPicker 
+                loaded="onListPickerLoaded"
+                items="{{ repeats }}"
+                selectedValue="{{ repeatValue }}">
+            </ListPicker>        
+        </StackLayout>
+        <Button tap='onSubmitItemTap' class="btn btn-primary btn-active" id="button" text="Save!" ></Button>
+        <lv:RadListView separatorColor="black" swipeActions="true" itemSwipeProgressStarted="onSwipeCellStarted" items="{{ notifications }}" height="100%">
+            <lv:RadListView.itemTemplate class="alert">
+                <StackLayout class="alert-item" width="100%" height="auto" orientation="horizontal">
+                    <Image src="res://alert" width="50%"  stretch="aspectFill" class="img-menu"></Image>
+                    <StackLayout width="60%" orientation="vertical" backgroundColor="white">
+                        <Label class="spending-item"  text="{{ 'Title :' + title }}" />
+                        <Label class="spending-item"  text="{{ 'When :' + when }}" />
+                        <Label class="spending-item"  text="{{ 'Repeat at :' + repeat_on }}" />
+                    </StackLayout>
+                </StackLayout>
+            </lv:RadListView.itemTemplate>
+            <lv:RadListView.itemSwipeTemplate >
+                <Label class="spending-item-centered"  text="Deleting..." />
+            </lv:RadListView.itemSwipeTemplate>
+        </lv:RadListView>
+    </StackLayout>
+
+</Page>
