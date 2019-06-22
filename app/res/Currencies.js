@@ -9,7 +9,10 @@ const COURSES = {
     },
 }
 
-function convertEurosAndDollarsToLevas(euros, dollars, levasParam) {
+function convertEurosAndDollarsToLevas(eurosParam, dollarsParam, levasAsParam) {
+    const euros = eurosParam || 0;
+    const dollars = dollarsParam || 0;
+    const levasParam = levasAsParam || 0;
     let levas = 0;
     const euroCourse = (appSettings.getNumber('EUR')) ? appSettings.getNumber('EUR') : COURSES.euros.course;
     const dollarsourse = (appSettings.getNumber('USD')) ? appSettings.getNumber('USD') : COURSES.dollars.course;

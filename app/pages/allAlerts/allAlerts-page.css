@@ -1,0 +1,27 @@
+/*
+ * File: home-page.css
+ * Project: PHPDI
+ * File Created: Saturday, 8th June 2019 3:00:03 pm
+ * Author: Ivan Grigorov
+ * Contact:  ivangrigorov9 at gmail.com
+ * -----
+ * Last Modified: Saturday, 22nd June 2019 9:29:16 pm
+ * Modified By: Ivan Grigorov
+ * -----
+ * License: MIT
+ */
+
+.spending-item {
+    padding-left: 15px;
+    font-size: 15em;
+}
+
+.alert-item {
+    background-color:white;
+    padding: 10px;
+    border: 5px solid black;
+}
+
+.alert {
+    border: 5px solid black;
+}

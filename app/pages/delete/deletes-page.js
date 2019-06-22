@@ -7,6 +7,7 @@ logic, and to set up your page’s data binding.
 const DeletesViewModel = require("./deletes-view-model");
 const DbManager = require("../../db/DbManager");
 const dialogs = require("tns-core-modules/ui/dialogs");
+const { convertDate } = require("./../../res/helpfulFunctions")
 
 
 function onNavigatingTo(args) {
@@ -30,12 +31,6 @@ function onNavigatingTo(args) {
         });
     });
     
-}
-
-function convertDate(inputFormat) {
-    function pad(s) { return (s < 10) ? '0' + s : s; }
-    var d = new Date(inputFormat);
-    return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
 }
 
 function onDeleteByDateItemTap(args) {

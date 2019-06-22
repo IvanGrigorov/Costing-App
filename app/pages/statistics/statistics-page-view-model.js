@@ -1,5 +1,6 @@
 const { Observable } = require("tns-core-modules/data/observable");
 const { convertEurosAndDollarsToLevas } = require("./../../res/Currencies");
+const { convertDate } = require("./../../res/helpfulFunctions")
 
 
 
@@ -177,12 +178,6 @@ class StatisticsViewModel extends Observable{
                 return true;
             }
         }
-    }
-
-    convertDate(inputFormat) {
-        function pad(s) { return (s < 10) ? '0' + s : s; }
-        var d = new Date(inputFormat);
-        return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
     }
 
     filterByDate(scope, dateAfter, record) {

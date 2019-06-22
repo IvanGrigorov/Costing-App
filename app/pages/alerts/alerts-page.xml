@@ -1,0 +1,55 @@
+<Page class="page"
+    navigatingTo="onNavigatingTo"  
+    xmlns="http://schemas.nativescript.org/tns.xsd">
+
+    <ActionBar class="action-bar">
+        <Label class="action-bar-title" text="Alerts"></Label>
+    </ActionBar>
+    <ScrollView>
+        <StackLayout width="100%" height="auto" orientation="vertical" backgroundColor="white">
+            <StackLayout  width="100%" orientation="horizontal">
+                <Label class="new-spending-item" width="33%" text="Date range" />
+                <Switch class="switch" width="33%" color="blue"
+                    backgroundColor="green"
+                    offBackgroundColor="green"
+                    checkedChange="onCheckedChange"
+                    checked="{{ switch }}"/>
+                <Label class="new-spending-item" width="33%" text="Predefined" />
+            </StackLayout>
+            <Label class="new-spending-item" width="50%" text="Max sum:" />
+            <TextField keyboardType="number" text="{{ sumValue }}" width="50%" hint="Enter Sum" autocorrect="false"></TextField>
+            <StackLayout visibility="{{ isDateRangeVisible }}" margin="auto" width="60%" orientation="vertical">
+                <Label class="new-spending-item" width="100%" text="From:" />
+                <DatePicker loaded="onDatePickerLoaded" date="{{ fromDate }}"></DatePicker>
+                <Label class="new-spending-item" width="100%" text="To:" />
+                <DatePicker loaded="onDatePickerLoaded" date="{{ toDate }}"></DatePicker>
+            </StackLayout>
+            <StackLayout visibility="{{ isPredefinedVisible }}" margin="auto" width="60%" orientation="vertical">
+                <Label class="new-spending-item" width="100%" text="Predefined:" />
+                <ListPicker 
+                    itemSelected="{{ onItemSelected }}"
+                    loaded="onListPickerLoaded"
+                    items="{{ dates }}"
+                    selectedValue="{{ datesValue }}">
+                </ListPicker>
+                <Label class="new-spending-item" width="33%" text="Repeating" />
+                <Switch class="switch" width="33%" color="blue"
+                    backgroundColor="green"
+                    offBackgroundColor="red"
+                    checked="{{ repeated }}"/>
+            </StackLayout>
+            <StackLayout width="60%" height="300px" orientation="vertical">
+                <Label class="new-spending-item" width="50%" text="Label: " />
+                <ListPicker 
+                    itemSelected="{{ onItemSelected }}"
+                    loaded="onListPickerLoaded"
+                    items="{{ labels }}"
+                    selectedValue="{{ labelsValue }}">
+                </ListPicker>
+            </StackLayout>
+            <Button tap='onSubmitItemTap' class="btn btn-primary btn-active" id="button" text="Save!" ></Button>
+
+        </StackLayout>
+    </ScrollView>
+
+</Page>

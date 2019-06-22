@@ -3,7 +3,7 @@
     xmlns="http://schemas.nativescript.org/tns.xsd">
 
     <ActionBar class="action-bar">
-        <Label class="action-bar-title" text="Spendings"></Label>
+        <Label class="action-bar-title" text="New spendings"></Label>
     </ActionBar>
     <ScrollView orientation="vertical" row="1" col="2" width="100%">
         <StackLayout width="100%" height="auto" orientation="vertical" backgroundColor="white">

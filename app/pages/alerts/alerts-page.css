@@ -5,23 +5,17 @@
  * Author: Ivan Grigorov
  * Contact:  ivangrigorov9 at gmail.com
  * -----
- * Last Modified: Saturday, 22nd June 2019 8:30:20 pm
+ * Last Modified: Friday, 21st June 2019 11:35:39 pm
  * Modified By: Ivan Grigorov
  * -----
  * License: MIT
  */
 
-.home-option {
-    padding: 10%;
-
-}
-
-.img-menu {
-    margin: 2%;
-}
-
-.home-button-label {
-    margin-top: 5%;
+.new-spending-item {
     text-align: center;
-    font-size: 18em
+    font-size: 18em;
+}
+
+.switch * {
+    float: left;
 }

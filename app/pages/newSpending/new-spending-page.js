@@ -5,6 +5,7 @@ logic, and to set up your page’s data binding.
 */
 const DbManager = require("../../db/DbManager")
 const NewSpendingViewModel = require("./new-spending-view-model");
+const {getAlertsByDate, shouldShowAlert} = require("./../../res/AlertsManager");
 const dialogs = require("tns-core-modules/ui/dialogs");
 
 
@@ -59,46 +60,59 @@ function onSubmitItemTap(args) {
         showDateAlert("Fields cannot be empty");
         return;
     }
-    const DbManagerInstance = new DbManager();
-    const SQL = "INSERT INTO spending(`for`, `category`, `sum`, `currency`, `when`, `label`) VALUES (:for, :category, :sum, :currency, :when, :label)";
-    const PARAMS_ARRAY = [
-        {
-            key: ':for',
-            value: bindingContect.forValue
-        },
-        {
-            key: ':category',
-            value: bindingContect.categoryValue
-        },
-        {
-            key: ':sum',
-            value: bindingContect.sumValue
-        },
-        {
-            key: ':currency',
-            value: bindingContect.currencyValue
-        },
-        {
-            key: ':when',
-            value: bindingContect.whenValue
-        },
-        {
-            key: ':label',
-            value: bindingContect.labelValue
-        }
-    ]
-    DbManagerInstance.getDbConnection().then(db => {
-        DbManagerInstance.executeParamQuery(db, SQL, PARAMS_ARRAY).then(() => {
-            dialogs.alert("New spending added !").then(() => {
-                console.log("SUCCESSFULL INSERT");
-            })},
-            error => {
-                dialogs.alert("New spending not added !").then(() => {
-                    console.log("SOME ERROR", error);
-                }) 
-            }
-        );
-    });
+    getAlertsByDate(bindingContect.whenValue).then((alerts) => {
+        shouldShowAlert(alerts, bindingContect).then(() => {
+            const DbManagerInstance = new DbManager();
+            const SQL = "INSERT INTO spending(`for`, `category`, `sum`, `currency`, `when`, `label`) VALUES (:for, :category, :sum, :currency, :when, :label)";
+            const PARAMS_ARRAY = [
+                {
+                    key: ':for',
+                    value: bindingContect.forValue
+                },
+                {
+                    key: ':category',
+                    value: bindingContect.categoryValue
+                },
+                {
+                    key: ':sum',
+                    value: bindingContect.sumValue
+                },
+                {
+                    key: ':currency',
+                    value: bindingContect.currencyValue
+                },
+                {
+                    key: ':when',
+                    value: bindingContect.whenValue
+                },
+                {
+                    key: ':label',
+                    value: bindingContect.labelValue
+                }
+            ]
+            DbManagerInstance.getDbConnection().then(db => {
+                DbManagerInstance.executeParamQuery(db, SQL, PARAMS_ARRAY).then(() => {
+                    dialogs.alert("New spending added !").then(() => {
+                        console.log("SUCCESSFULL INSERT");
+                    })},
+                    error => {
+                        dialogs.alert("New spending not added !").then(() => {
+                            console.log("SOME ERROR", error);
+                        }) 
+                    }
+                );
+            });
+        }).catch((alert) => {
+            let msg = "You exceed maximum amount of " + alert[3] + " leva for the period of " + alert[0] + " - " + alert[1];
+            if (alert[2] != "None") {
+                msg += " and label " + alert[2];
+            } 
+            msg += " !";
+            dialogs.alert(msg).then(() => {
+                console.log("SOME ALERT", error);
+            });
+        });
+    })
 }
 
 module.exports = {

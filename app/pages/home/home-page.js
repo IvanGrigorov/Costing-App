@@ -6,12 +6,14 @@ logic, and to set up your page’s data binding.
 
 const HomeViewModel = require("./home-view-model");
 const DbManager = require("../../db/DbManager");
-const { CREATE_SPENDINGS_TABLE, CREATE_LABEL_TABLE, CREATE_LABEL_TO_SPENDING_TABLE } = require("../../db/DbInitialScripts");
+const { CREATE_SPENDINGS_TABLE, CREATE_LABEL_TABLE, CREATE_LABEL_TO_SPENDING_TABLE, CREATE_ALERTS_TABLE } = require("../../db/DbInitialScripts");
 const { isThereConnection } = require("./../../connectivity/connetctivity");
 const { getBGNCourse } = require("./../../http/getCurrencyCoureses");
 const { shouldWeUseCache } = require("./../../sharedSettings/settings");
 const appSettings = require("application-settings");
 const dialogs = require("tns-core-modules/ui/dialogs");
+const { getRepeatedAlerts, insertPredefinedAlerts } = require("./../../res/AlertsManager");
+
 
 function onNavigatingTo(args) {
     const page = args.object;
@@ -52,27 +54,27 @@ function onNavigatingTo(args) {
     }
 
     DbManagerInstance.getDbConnection().then(db => {
-        DbManagerInstance.executeQuery(db, CREATE_SPENDINGS_TABLE).then(() => {
-                console.log("DB Spendings Created")
-            },
-            error => {
-                console.log("CREATE TABLE ERROR", error);
-            }
-        );
-        DbManagerInstance.executeQuery(db, CREATE_LABEL_TABLE).then(() => {
-                console.log("DB Label Created")
-            },
-            error => {
-                console.log("CREATE TABLE ERROR", error);
-            }
-        );
-        DbManagerInstance.executeQuery(db, CREATE_LABEL_TO_SPENDING_TABLE).then(() => {
-                console.log("DB Label To Spending Created")
-            },
-            error => {
-                console.log("CREATE TABLE ERROR", error);
-            }
-        );
+        const dbPromisesArray = [
+            DbManagerInstance.executeQuery(db, CREATE_SPENDINGS_TABLE),
+            DbManagerInstance.executeQuery(db, CREATE_LABEL_TABLE),
+            DbManagerInstance.executeQuery(db, CREATE_ALERTS_TABLE),
+        ]
+
+        Promise.all(dbPromisesArray).then(() => {
+            getRepeatedAlerts().then((alerts) => {
+                if (alerts.length) {
+                    const alertsToInsert = insertPredefinedAlerts(alerts);
+                    Promise.all(alertsToInsert).then(() => {
+                        console.log("Database created");
+                        console.log("Repeated alerts");
+                    })
+                }
+                else {
+                    console.log("Database created");
+                    console.log("No repeated alerts");
+                }
+            })
+        });
     });
 }
 
@@ -101,10 +103,24 @@ function onDeletesTap(args) {
     page.frame.navigate("pages/delete/deletes-page");
 }
 
+function onAlertsTap(args) {
+    const button = args.object;
+    const page = button.page;
+    page.frame.navigate("pages/alerts/alerts-page");
+}
+
+function onAllAlertsTap(args) {
+    const button = args.object;
+    const page = button.page;
+    page.frame.navigate("pages/allAlerts/allAlerts-page");
+}
+
 module.exports = {
     onNavigatingTo: onNavigatingTo,
     onNewSpendingTap: onNewSpendingTap,
     onStatisticsTap: onStatisticsTap,
     onNewLabelsTap: onNewLabelsTap,
-    onDeletesTap: onDeletesTap
+    onDeletesTap: onDeletesTap,
+    onAlertsTap: onAlertsTap,
+    onAllAlertsTap: onAllAlertsTap
 }
