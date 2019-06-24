@@ -11,7 +11,7 @@ function onNavigatingTo(args) {
     const DbManagerInstance = new DbManager();
     DbManagerInstance.getDbConnection().then(db => {
         const SQL_Spending = "SELECT `for`, `category`, `sum`, `currency`, `when`, `label`, `id` FROM spending";
-        const SQL_labels = "SELECT `label` FROM labels";
+        const SQL_labels = "SELECT `label` FROM labels WHERE `is_deleted` = 0";
 
         const promissesArray = [
             DbManagerInstance.allQuery(db, SQL_Spending, []),

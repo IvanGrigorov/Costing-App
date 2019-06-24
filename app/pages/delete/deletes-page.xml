@@ -28,6 +28,7 @@
                 <Button tap='onDeleteByLabelItemTap' class="btn btn-primary btn-active" id="button" text="Delete by label!" ></Button>
             </StackLayout>
             <Button tap='onDeleteByBothItemTap' class="btn btn-primary btn-active" id="button" text="Delete by both!" ></Button>
+            <Button tap='onDeleteByDeletedLabelsItemTap' class="btn btn-primary btn-active" id="button" text="Delete by deleted labels!" ></Button>
         </StackLayout>
     </ScrollView>
 </Page>

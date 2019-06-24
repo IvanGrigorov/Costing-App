@@ -13,7 +13,7 @@ function onNavigatingTo(args) {
     const page = args.object;
     const bindingContext = new AlertsViewModel();
 
-    SQL = "SELECT `label` FROM labels";
+    SQL = "SELECT `label` FROM labels WHERE `is_deleted` = 0";
     const DbManagerInstance = new DbManager();
     DbManagerInstance.getDbConnection().then(db => {
         DbManagerInstance.allQuery(db, SQL, []).then((labels) => {

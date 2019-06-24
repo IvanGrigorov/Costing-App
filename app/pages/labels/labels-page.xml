@@ -1,6 +1,8 @@
 <Page class="page"
     navigatingTo="onNavigatingTo"  
-    xmlns="http://schemas.nativescript.org/tns.xsd">
+    xmlns="http://schemas.nativescript.org/tns.xsd"
+    xmlns:lv="nativescript-ui-listview">
+
 
     <ActionBar class="action-bar">
         <Label class="action-bar-title" text="Labels"></Label>
@@ -12,7 +14,19 @@
             <TextField text="{{ labelValue }}" width="50%" hint="Enter Label" autocorrect="false"></TextField>
         </StackLayout>
         <Button tap='onSubmitItemTap' class="btn btn-primary btn-active" id="button" text="Save!" ></Button>
-
+        <lv:RadListView separatorColor="black" swipeActions="true" itemSwipeProgressStarted="onSwipeCellStarted" items="{{ labels }}" height="100%">
+            <lv:RadListView.itemTemplate class="alert">
+                <StackLayout class="alert-item" width="100%" height="auto" orientation="horizontal">
+                    <Image src="res://label" width="50%"  stretch="aspectFill" class="img-menu"></Image>
+                    <StackLayout className="notification-info" width="60%" orientation="vertical" backgroundColor="white">
+                        <Label textWrap="true" class="spending-item"  text="{{ 'Label : ' + label }}" />
+                    </StackLayout>
+                </StackLayout>
+            </lv:RadListView.itemTemplate>
+            <lv:RadListView.itemSwipeTemplate >
+                <Label class="spending-item-centered"  text="Deleting..." />
+            </lv:RadListView.itemSwipeTemplate>
+        </lv:RadListView>
     </StackLayout>
 
 </Page>

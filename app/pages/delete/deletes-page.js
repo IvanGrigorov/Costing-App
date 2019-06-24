@@ -14,21 +14,26 @@ function onNavigatingTo(args) {
     const page = args.object;
     let bindingContext = new DeletesViewModel();
 
-    const SQL = "SELECT `label` FROM labels";
+    const SQL = "SELECT `label` FROM labels WHERE `is_deleted` = 0";
     const DbManagerInstance = new DbManager();
     DbManagerInstance.getDbConnection().then(db => {
-        DbManagerInstance.allQuery(db, SQL, []).then((labels) => {
-            let labelsToAdd = [];
-            for (let i = 0; i < labels.length; i++) {
-                labelsToAdd.push(labels[i][0]);
+        DbManagerInstance.allQuery(db, SQL, []).then(
+            (labels) => {
+                let labelsToAdd = [];
+                for (let i = 0; i < labels.length; i++) {
+                    labelsToAdd.push(labels[i][0]);
+                }
+                bindingContext.labels = labelsToAdd;
+                bindingContext.labelsValue = (labels && labels[0] && labels[0][0]) ? (labels[0][0]) : "";
+                //if (labelsToAdd.length) {
+                //    bindingContext.isLabelOptionVisible = true
+                //}
+                page.bindingContext = bindingContext;
+            },
+            error => {
+                console.log(error);
             }
-            bindingContext.labels = labelsToAdd;
-            bindingContext.labelsValue = (labels && labels[0] && labels[0][0]) ? (labels[0][0]) : "";
-            //if (labelsToAdd.length) {
-            //    bindingContext.isLabelOptionVisible = true
-            //}
-            page.bindingContext = bindingContext;
-        });
+        );
     });
     
 }
@@ -105,10 +110,30 @@ function onDeleteByBothItemTap(args) {
 
 }
 
+function onDeleteByDeletedLabelsItemTap() {
+
+    const SQL = "DELETE FROM spending WHERE `label` IN (SELECT `label` FROM labels WHERE `is_deleted` = 1)";
+
+    const DbManagerInstance = new DbManager();
+    DbManagerInstance.getDbConnection().then(db => {
+        DbManagerInstance.executeQuery(db, SQL).then(
+            () => {
+                dialogs.alert("Delete successfull !").then(() => {
+                    console.log("SUCCESSFULL DELETE");
+                })
+            },
+            errors => {
+                console.log(error);
+            }
+        )
+    });
+}
+
 
 module.exports = {
     onDeleteByDateItemTap: onDeleteByDateItemTap,
     onDeleteByLabelItemTap: onDeleteByLabelItemTap,
     onDeleteByBothItemTap: onDeleteByBothItemTap,
-    onNavigatingTo: onNavigatingTo
+    onNavigatingTo: onNavigatingTo,
+    onDeleteByDeletedLabelsItemTap: onDeleteByDeletedLabelsItemTap
 }

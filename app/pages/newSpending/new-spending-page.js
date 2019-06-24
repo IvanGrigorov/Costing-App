@@ -12,7 +12,7 @@ const dialogs = require("tns-core-modules/ui/dialogs");
 function onNavigatingTo(args) {
     const page = args.object;
     let bindingContext = new NewSpendingViewModel();
-    const SQL = "SELECT `label` FROM labels";
+    const SQL = "SELECT `label` FROM labels WHERE `is_deleted` = 0";
     const DbManagerInstance = new DbManager();
     DbManagerInstance.getDbConnection().then(db => {
         DbManagerInstance.allQuery(db, SQL, []).then((labels) => {
@@ -22,7 +22,8 @@ function onNavigatingTo(args) {
             }
             bindingContext.labels = labelsToAdd;
             if (labelsToAdd.length) {
-                bindingContext.isLabelOptionVisible = true
+                bindingContext.isLabelOptionVisible = true;
+                bindingContext.labels.push("None");
             }
             page.bindingContext = bindingContext;
         });

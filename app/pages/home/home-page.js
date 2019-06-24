@@ -82,7 +82,6 @@ function initApp() {
             getRepeatedAlerts()
 
         ]
-
         Promise.all(dbPromisesArray).then((data) => {
             const alerts = data[4];
             if (alerts.length) {
