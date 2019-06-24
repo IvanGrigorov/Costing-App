@@ -9,35 +9,35 @@
         <GridLayout columns="*,*" rows="200px, 200px, 200px, 200px" backgroundColor="lightgray" width="100%" height="auto" >
             <StackLayout marginTop="30px" tap="onNewSpendingTap" class="home-option" col="0" row="0" width="48%" orientation="vertical" backgroundColor="#ADFF2F">
                 <Label class="home-button-label"  width="100%" height="100px" text="{{ newSpending }}" />
-                <Image src="res://money" width="100%" height="auto" stretch="aspectFill " class="img-menu"></Image>
+                <Image src="res://money" width="100%" height="auto" stretch="aspectFill" class="img-menu"></Image>
             </StackLayout>
             <StackLayout marginTop="30px" tap="onStatisticsTap" class="home-option" col="1" row="0" width="48%" orientation="vertical" backgroundColor="#ADFF2F">
                 <Label class="home-button-label" width="100%" height="100px" text="{{ statistics }}"/>
-                <Image src="res://money" width="100%" height="auto" stretch="aspectFill " class="img-menu"></Image>
+                <Image src="res://statistics" width="100%" height="auto" stretch="aspectFill" class="img-menu"></Image>
             </StackLayout>
             <StackLayout marginTop="30px" tap="onAlertsTap" class="home-option" col="0" row="1" width="48%" orientation="vertical" backgroundColor="#ADFF2F">
                 <Label class="home-button-label"  width="100%" height="100px" text="{{ alerts }}" />
-                <Image src="res://money" width="100%" height="auto" stretch="aspectFill " class="img-menu"></Image>
+                <Image src="res://alert" width="100%" height="auto" stretch="aspectFill" class="img-menu"></Image>
             </StackLayout>
             <StackLayout marginTop="30px" tap="onNewLabelsTap" class="home-option" col="1" row="1" width="48%" orientation="vertical" backgroundColor="#ADFF2F">
                 <Label class="home-button-label" width="100%" height="100px" text="{{ labels }}"/>
-                <Image src="res://money" width="100%" height="auto" stretch="aspectFill " class="img-menu"></Image>
+                <Image src="res://label" width="100%" height="auto" stretch="aspectFill" class="img-menu"></Image>
             </StackLayout>
             <StackLayout marginTop="30px" tap="onDeletesTap" class="home-option" col="0" row="2" width="48%" orientation="vertical" backgroundColor="#ADFF2F">
                 <Label class="home-button-label" width="100%" height="100px" text="{{ delete }}"/>
-                <Image src="res://money" width="100%" height="auto" stretch="aspectFill " class="img-menu"></Image>
+                <Image src="res://delete" width="100%" height="auto" stretch="aspectFill" class="img-menu"></Image>
             </StackLayout>
             <StackLayout marginTop="30px" tap="onAllAlertsTap" class="home-option" col="1" row="2" width="48%" orientation="vertical" backgroundColor="#ADFF2F">
                 <Label class="home-button-label" width="100%" height="100px" text="All Alerts"/>
-                <Image src="res://money" width="100%" height="auto" stretch="aspectFill " class="img-menu"></Image>
+                <Image src="res://alert" width="100%" height="auto" stretch="aspectFill" class="img-menu"></Image>
             </StackLayout>
             <StackLayout marginTop="30px" tap="onNotificationsTap" class="home-option" col="0" row="3" width="48%" orientation="vertical" backgroundColor="#ADFF2F">
                 <Label class="home-button-label" width="100%" height="100px" text="Notifications"/>
-                <Image src="res://money" width="100%" height="auto" stretch="aspectFill " class="img-menu"></Image>
+                <Image src="res://notification" width="100%" height="auto" stretch="aspectFill" class="img-menu"></Image>
             </StackLayout>
-            <StackLayout marginTop="30px" class="home-option" col="1" row="3" width="48%" orientation="vertical" backgroundColor="#ADFF2F">
+            <StackLayout marginTop="30px" tap="onCreditsTap" class="home-option" col="1" row="3" width="48%" orientation="vertical" backgroundColor="#ADFF2F">
                 <Label class="home-button-label" width="100%" height="100px" text="{{ credits }}"/>
-                <Image src="res://money" width="100%" height="auto" stretch="aspectFill " class="img-menu"></Image>
+                <Image src="res://author" width="100%" height="auto" stretch="aspectFill" class="img-menu"></Image>
             </StackLayout>
         </GridLayout>
     </ScrollView>

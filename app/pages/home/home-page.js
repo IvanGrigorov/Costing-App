@@ -13,14 +13,34 @@ const { shouldWeUseCache } = require("./../../sharedSettings/settings");
 const appSettings = require("application-settings");
 const dialogs = require("tns-core-modules/ui/dialogs");
 const { getRepeatedAlerts, insertPredefinedAlerts } = require("./../../res/AlertsManager");
+const application = require("tns-core-modules/application");
 
 
 function onNavigatingTo(args) {
     const page = args.object;
     page.bindingContext = new HomeViewModel();
+    initApp();
+}
 
+function addAplicationEvents() {
+    application.on(application.suspendEvent, (args) => {
+        appSettings.remove("isLaunched");
+    });
+
+    application.on(application.exitEvent, (args) => {
+        appSettings.remove("isLaunched");
+    });
+}
+
+function initApp() {
+    addAplicationEvents();
+    if (appSettings.getBoolean("isLaunched")) {
+        return
+    }
+    appSettings.setBoolean("isLaunched", true);
     const DbManagerInstance = new DbManager(); 
     
+
     if (!shouldWeUseCache()) {
         if (isThereConnection()) {
             getBGNCourse('USD').then((r) => {
@@ -59,24 +79,24 @@ function onNavigatingTo(args) {
             DbManagerInstance.executeQuery(db, CREATE_LABEL_TABLE),
             DbManagerInstance.executeQuery(db, CREATE_ALERTS_TABLE),
             DbManagerInstance.executeQuery(db, CREATE_NOTIFICATIONS_TABLE),
+            getRepeatedAlerts()
 
         ]
 
-        Promise.all(dbPromisesArray).then(() => {
-            getRepeatedAlerts().then((alerts) => {
-                if (alerts.length) {
-                    const alertsToInsert = insertPredefinedAlerts(alerts);
-                    Promise.all(alertsToInsert).then(() => {
-                        console.log("Database created");
-                        console.log("Repeated alerts");
-                    })
-                }
-                else {
+        Promise.all(dbPromisesArray).then((data) => {
+            const alerts = data[4];
+            if (alerts.length) {
+                const alertsToInsert = insertPredefinedAlerts(alerts);
+                Promise.all(alertsToInsert).then(() => {
                     console.log("Database created");
-                    console.log("No repeated alerts");
-                }
-            })
-        });
+                    console.log("Repeated alerts");
+                })
+            }
+            else {
+                console.log("Database created");
+                console.log("No repeated alerts");
+            }
+        })
     });
 }
 
@@ -123,6 +143,12 @@ function onNotificationsTap(args) {
     page.frame.navigate("pages/notifications/notifications-page");
 }
 
+function onCreditsTap(args) {
+    const button = args.object;
+    const page = button.page;
+    page.frame.navigate("pages/credits/credits-page");
+}
+
 module.exports = {
     onNavigatingTo: onNavigatingTo,
     onNewSpendingTap: onNewSpendingTap,
@@ -131,5 +157,6 @@ module.exports = {
     onDeletesTap: onDeletesTap,
     onAlertsTap: onAlertsTap,
     onAllAlertsTap: onAllAlertsTap,
-    onNotificationsTap: onNotificationsTap
+    onNotificationsTap: onNotificationsTap,
+    onCreditsTap: onCreditsTap
 }

@@ -13,12 +13,12 @@
             <StackLayout class="alert-item" width="100%" height="auto" orientation="horizontal">
                 <Image src="res://alert" width="50%"  stretch="aspectFill" class="img-menu"></Image>
                 <StackLayout width="60%" orientation="vertical" backgroundColor="white">
-                    <Label class="spending-item"  text="{{ 'From :' + from }}" />
-                    <Label class="spending-item"  text="{{ 'To :' + to }}" />
-                    <Label class="spending-item"  text="{{ 'Sum :' + sum }}" />
-                    <Label class="spending-item"  text="{{ 'Interval :' + interval }}" />
-                    <Label class="spending-item"  text="{{ 'Label :' + label }}" />
-                    <Label class="spending-item"  text="{{ 'Repeating :' + ((repeating) ? 'Yes' : 'No') }}" />
+                    <Label textWrap="true" class="spending-item"  text="{{ 'From : ' + from }}" />
+                    <Label textWrap="true" class="spending-item"  text="{{ 'To : ' + to }}" />
+                    <Label class="spending-item"  text="{{ 'Sum : ' + sum }}" />
+                    <Label class="spending-item"  text="{{ 'Interval : ' + interval }}" />
+                    <Label class="spending-item"  text="{{ 'Label : ' + label }}" />
+                    <Label class="spending-item"  text="{{ 'Repeating : ' + ((repeating) ? 'Yes' : 'No') }}" />
                 </StackLayout>
             </StackLayout>
         </lv:RadListView.itemTemplate>

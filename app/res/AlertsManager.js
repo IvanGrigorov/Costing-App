@@ -101,6 +101,8 @@ function getAlertsByDate(date) {
 }
 
 function shouldShowAlert(alerts, spendingData) {
+    let me = this;
+    me.spendingData = spendingData;
     let arrayOfPromisses = [];
     for (let i = 0; i < alerts.length; i++) {
         let SQL = "SELECT `sum`, `currency` FROM spending WHERE `when` >= '" + alerts[i][0] + "' AND `when` <= '" + alerts[i][1]  + "'";
@@ -113,12 +115,16 @@ function shouldShowAlert(alerts, spendingData) {
                 DbManagerInstance.getDbConnection().then(db => {
                     DbManagerInstance.allQuery(db, SQL, []).then((spendings) => {
                         let sum = 0;
+                        this.Euros = 0;  
+                        this.Dollars = 0
+                        this.Levas = 0;
                         for (let j = 0; j < spendings.length; j++) {
                             if (!this[spendings[j][1]]) {
                                 this[spendings[j][1]] = 0;
                             } 
                             this[spendings[j][1]] += + spendings[j][0];
                         }
+                        this[me.spendingData.currencyValue] +=  + me.spendingData.sumValue;
                         sum += + convertEurosAndDollarsToLevas(this.Euros, this.Dollars, this.Levas);
 
                         if (alerts[i][3] < sum) {

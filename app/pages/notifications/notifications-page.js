@@ -125,7 +125,7 @@ function scheduleNotification(data) {
         badge: 1,
         groupSummary:"Payment notifications", //android only
         ongoing: true, // makes the notification ongoing (Android only)
-        icon: 'res://alert',
+        icon: 'res://notification',
         thumbnail: true,
         interval: data.repeatValue,
         sound: "customsound-ios.wav", // falls back to the default sound on Android

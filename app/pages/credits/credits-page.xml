@@ -1,0 +1,24 @@
+<Page class="page"
+    navigatingTo="onNavigatingTo"  
+    xmlns="http://schemas.nativescript.org/tns.xsd">
+
+    <ActionBar class="action-bar">
+        <Label class="action-bar-title" text="Labels"></Label>
+    </ActionBar>
+
+    <StackLayout width="100%" height="auto" orientation="vertical" backgroundColor="white">
+        <StackLayout width="100%" orientation="horizontal">
+            <Label class="new-spending-item" width="40%" text="Author: " />
+            <Label class="new-spending-item" text="Ivan Grigorov" width="60%" />
+        </StackLayout>
+        <StackLayout width="100%" orientation="horizontal">
+            <Label class="new-spending-item" width="40%" text="Contacts: " />
+            <Label class="new-spending-item" text="ivangrigorov9@gmail.com" width="60%" />
+        </StackLayout>
+        <StackLayout width="100%" orientation="horizontal">
+            <Label class="new-spending-item" width="40%" text="Use: " />
+            <Label class="new-spending-item" text="Free" width="60%" />
+        </StackLayout>
+    </StackLayout>
+
+</Page>

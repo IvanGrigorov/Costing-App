@@ -13,11 +13,11 @@
         </StackLayout>
         <StackLayout width="100%" orientation="horizontal">
             <Label class="new-spending-item" width="40%" text="When: " />
-            <TimePicker time="{{ time }}" verticalAlignment="center" ></TimePicker>
+            <TimePicker height="250px" time="{{ time }}" verticalAlignment="center" ></TimePicker>
         </StackLayout>
         <StackLayout width="100%" orientation="horizontal">
             <Label class="new-spending-item" width="40%" text="Repeat at: " />
-            <ListPicker 
+            <ListPicker height="250px" 
                 loaded="onListPickerLoaded"
                 items="{{ repeats }}"
                 selectedValue="{{ repeatValue }}">
@@ -27,11 +27,11 @@
         <lv:RadListView separatorColor="black" swipeActions="true" itemSwipeProgressStarted="onSwipeCellStarted" items="{{ notifications }}" height="100%">
             <lv:RadListView.itemTemplate class="alert">
                 <StackLayout class="alert-item" width="100%" height="auto" orientation="horizontal">
-                    <Image src="res://alert" width="50%"  stretch="aspectFill" class="img-menu"></Image>
-                    <StackLayout width="60%" orientation="vertical" backgroundColor="white">
-                        <Label class="spending-item"  text="{{ 'Title :' + title }}" />
-                        <Label class="spending-item"  text="{{ 'When :' + when }}" />
-                        <Label class="spending-item"  text="{{ 'Repeat at :' + repeat_on }}" />
+                    <Image src="res://notification" width="50%"  stretch="aspectFill" class="img-menu"></Image>
+                    <StackLayout className="notification-info" width="60%" orientation="vertical" backgroundColor="white">
+                        <Label textWrap="true" class="spending-item"  text="{{ 'Title : ' + title }}" />
+                        <Label textWrap="true" class="spending-item"  text="{{ 'When : ' + when }}" />
+                        <Label class="spending-item"  text="{{ 'Repeat at : ' + repeat_on }}" />
                     </StackLayout>
                 </StackLayout>
             </lv:RadListView.itemTemplate>
