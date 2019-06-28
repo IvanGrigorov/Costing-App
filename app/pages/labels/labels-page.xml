@@ -17,7 +17,7 @@
         <lv:RadListView separatorColor="black" swipeActions="true" itemSwipeProgressStarted="onSwipeCellStarted" items="{{ labels }}" height="100%">
             <lv:RadListView.itemTemplate class="alert">
                 <StackLayout class="alert-item" width="100%" height="auto" orientation="horizontal">
-                    <Image src="res://label" width="50%"  stretch="aspectFill" class="img-menu"></Image>
+                    <Image src="res://label" width="50%"  stretch="aspectFill" class="img-menu" backgroundColor="white"></Image>
                     <StackLayout className="notification-info" width="60%" orientation="vertical" backgroundColor="white">
                         <Label textWrap="true" class="spending-item"  text="{{ 'Label : ' + label }}" />
                     </StackLayout>

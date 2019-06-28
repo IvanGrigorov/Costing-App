@@ -16,6 +16,10 @@
             <Label class="new-spending-item" text="ivangrigorov9@gmail.com" width="60%" />
         </StackLayout>
         <StackLayout width="100%" orientation="horizontal">
+            <Label class="new-spending-item" width="40%" text="Icons: " />
+            <Label class="new-spending-item" text="Icon8" width="60%" />
+        </StackLayout>
+        <StackLayout width="100%" orientation="horizontal">
             <Label class="new-spending-item" width="40%" text="Use: " />
             <Label class="new-spending-item" text="Free" width="60%" />
         </StackLayout>

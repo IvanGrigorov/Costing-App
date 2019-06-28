@@ -33,7 +33,7 @@
             <lv:RadListView swipeActions="true" itemSwipeProgressStarted="onSwipeCellStarted"  filteringFunction="{{ filteringFunc }}" items="{{ spendings }}" height="100%">
                 <lv:RadListView.itemTemplate >
                     <StackLayout width="100%" orientation="horizontal" backgroundColor="white">
-                        <Image src="{{ img }}" width="40%"  stretch="aspectFill " class="img-menu"></Image>
+                        <Image src="{{ img }}" width="40%"  stretch="aspectFill" class="img-menu"></Image>
                         <StackLayout width="60%" orientation="vertical" backgroundColor="white">
                             <Label textWrap="true" class="spending-item"  text="{{ for }}" />
                             <Label class="spending-item"  text="{{ sum + ' ' + currency }}" />
