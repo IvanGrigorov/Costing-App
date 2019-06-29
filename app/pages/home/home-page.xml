@@ -8,7 +8,7 @@
     <ScrollView orientation="vertical">
         <GridLayout columns="*,*" rows="200px, 200px, 200px, 200px" backgroundColor="white" width="100%" height="auto" >
             <StackLayout marginTop="30px" tap="onNewSpendingTap" class="home-option" col="0" row="0" width="48%" orientation="vertical" backgroundColor="#FD9727">
-                <Label textWrap="true" class="home-button-label"  width="100%" height="129px" text="{{ newSpending }}" />
+                <Label textWrap="true" class="home-button-label"  width="100%" height="150px" text="{{ newSpending }}" />
                 <Image src="res://money" width="100%" height="auto" stretch="aspectFill" class="img-menu"></Image>
             </StackLayout>
             <StackLayout marginTop="30px" tap="onStatisticsTap" class="home-option" col="1" row="0" width="48%" orientation="vertical" backgroundColor="#FD9727">
