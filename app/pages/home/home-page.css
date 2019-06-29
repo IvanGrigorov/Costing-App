@@ -5,7 +5,7 @@
  * Author: Ivan Grigorov
  * Contact:  ivangrigorov9 at gmail.com
  * -----
- * Last Modified: Saturday, 22nd June 2019 8:30:20 pm
+ * Last Modified: Saturday, 29th June 2019 12:33:06 pm
  * Modified By: Ivan Grigorov
  * -----
  * License: MIT
@@ -13,6 +13,7 @@
 
 .home-option {
     padding: 10%;
+    border-radius: 100px;
 
 }
 
@@ -21,7 +22,8 @@
 }
 
 .home-button-label {
-    margin-top: 5%;
+    margin-top: 2%;
     text-align: center;
-    font-size: 18em
+    font-size: 20em;
+    color: #7546FE;
 }
