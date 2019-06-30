@@ -104,7 +104,7 @@ function onSubmitItemTap(args) {
                 );
             });
         }).catch((alert) => {
-            let msg = "You exceed maximum amount of " + alert[3] + " leva for the period of " + alert[0] + " - " + alert[1];
+            let msg = "You exceed maximum amount of " + alert[3] + " " + alert[4] + " for the period of " + alert[0] + " - " + alert[1];
             if (alert[2] != "None") {
                 msg += " and label " + alert[2];
             } 

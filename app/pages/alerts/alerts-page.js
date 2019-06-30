@@ -42,7 +42,7 @@ function onSubmitItemTap(args) {
 
 function dateRangeSubmit(alertData) {
     const DbManagerInstance = new DbManager();
-    const SQL = "INSERT INTO alerts( `from`, `to`, `label`, `sum`, `interval_as_text`, `repeat`) VALUES (:from, :to, :label, :sum, :interval_as_text, :repeat)";
+    const SQL = "INSERT INTO alerts( `from`, `to`, `label`, `sum`, `currency`, `interval_as_text`, `repeat`) VALUES (:from, :to, :label, :sum, :currency, :interval_as_text, :repeat)";
     const PARAMS_ARRAY = [
         {
             key: ':from',
@@ -59,6 +59,10 @@ function dateRangeSubmit(alertData) {
         {
             key: ':sum',
             value: alertData.sumValue
+        },
+        {
+            key: ':currency',
+            value: alertData.currencyValue
         },
         {
             key: ':interval_as_text',
@@ -85,7 +89,7 @@ function dateRangeSubmit(alertData) {
 
 function predefinedSubmit(alertData) {
     const DbManagerInstance = new DbManager();
-    const SQL = "INSERT INTO alerts( `from`, `to`, `label`, `sum`, `interval_as_text`, `repeat`) VALUES (:from, :to, :label, :sum, :interval_as_text, :repeat)";
+    const SQL = "INSERT INTO alerts( `from`, `to`, `label`, `sum`, `currency`, `interval_as_text`, `repeat`) VALUES (:from, :to, :label, :sum, :currency, :interval_as_text, :repeat)";
     const PARAMS_ARRAY = [
         {
             key: ':from',
@@ -102,6 +106,10 @@ function predefinedSubmit(alertData) {
         {
             key: ':sum',
             value: alertData.sumValue
+        },
+        {
+            key: ':currency',
+            value: alertData.currencyValue
         },
         {
             key: ':interval_as_text',

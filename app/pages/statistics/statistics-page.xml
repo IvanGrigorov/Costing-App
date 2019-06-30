@@ -26,9 +26,7 @@
             </ListPicker>
         </StackLayout>
         <StackLayout width="100%" orientation="vertical" backgroundColor="white">
-            <Label class="total-amount" height="100px" text="{{ 'Total amount: ' + maxSum }}" />
-            <Label class="total-amount" height="100px" text="{{ 'Total amount (Euros): ' + maxSumEuros }}" />
-            <Label class="total-amount" height="100px" text="{{ 'Total amount: (Dollars)' + maxSumDollars }}" />
+            <Label class="total-amount" height="100px" text="{{ 'Total amount (' + currency + '): ' + maxSum }}" />
 
             <lv:RadListView swipeActions="true" itemSwipeProgressStarted="onSwipeCellStarted"  filteringFunction="{{ filteringFunc }}" items="{{ spendings }}" height="100%">
                 <lv:RadListView.itemTemplate >

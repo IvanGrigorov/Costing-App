@@ -1,6 +1,6 @@
 const DbManager = require("../../db/DbManager")
 const { StatisticsViewModel } = require("./statistics-page-view-model");
-const { convertEurosAndDollarsToLevas } = require("./../../res/Currencies");
+const { convertEurosAndDollarsToLevas, convertCurrenciesToSelected } = require("./../../res/Currencies");
 const dialogs = require("tns-core-modules/ui/dialogs");
 
 
@@ -29,23 +29,25 @@ function onNavigatingTo(args) {
 
 function prepareSpendings(resultSet, statisticsViewModel) {
     let maxSum = 0;
-    this.maxSumDollars = 0;
-    this.maxSumEuros = 0;
-    this.maxSumLevas = 0;
+    var currenciesArray = [
+        {currency: "Australian dollar", sum: 0},
+        {currency: "Bulgarian lev", sum: 0},
+        {currency: "Brazilian real", sum: 0},
+        {currency: "Canadian dollar", sum: 0},
+        {currency: "Swiss franc", sum: 0},
+        {currency: "United States dollar", sum: 0},
+        {currency: "European Euro", sum: 0},
+    ];
     for (let i = 0; i < resultSet.length; i++) {
-        let test = this['maxSumEuros'];
         statisticsViewModel.pushspending(resultSet[i]);
-        const parsedIntSum = parseFloat(resultSet[i][2]);
-        if (parsedIntSum) {
-
-            const currency = resultSet[i][3];
-            const varName = 'maxSum' + currency;
-            this[varName] += + parsedIntSum
+        for(let j = 0; j < currenciesArray.length; j++) {
+            if (resultSet[i][3] == currenciesArray[j].currency) {
+                currenciesArray[j].sum += parseFloat(resultSet[i][2])
+            }
         }
     }
-    maxSum = convertEurosAndDollarsToLevas(this.maxSumEuros, this.maxSumDollars, this.maxSumLevas);
-    statisticsViewModel.maxSumEuros = this.maxSumEuros;
-    statisticsViewModel.maxSumDollars = this.maxSumDollars;
+    maxSum = convertCurrenciesToSelected(currenciesArray);
+
     statisticsViewModel.maxSum =  new Number(parseFloat(maxSum)).toFixed(2);
 }
 

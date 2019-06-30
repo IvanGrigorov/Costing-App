@@ -6,9 +6,13 @@ const CATEGORIES = [
 ];
 
 const CURRENCIES = [
-    "Dollars",
-    "Euros",
-    "Levas"
+    "Australian dollar",
+    "Bulgarian lev",
+    "Brazilian real",
+    "Canadian dollar",
+    "Swiss franc",
+    "United States dollar",
+    "European Euro"
 ];
 
 module.exports = {

@@ -14,6 +14,8 @@ const appSettings = require("application-settings");
 const dialogs = require("tns-core-modules/ui/dialogs");
 const { getRepeatedAlerts, insertPredefinedAlerts } = require("./../../res/AlertsManager");
 const application = require("tns-core-modules/application");
+const { convertEurosAndDollarsToLevas, convertCurrenciesToSelected, findShortNameByLongName } = require("./../../res/Currencies");
+
 
 
 function onNavigatingTo(args) {
@@ -33,45 +35,53 @@ function addAplicationEvents() {
 }
 
 function initApp() {
-    addAplicationEvents();
-    if (appSettings.getBoolean("isLaunched")) {
-        return
-    }
-    appSettings.setBoolean("isLaunched", true);
     const DbManagerInstance = new DbManager(); 
     
 
     if (!shouldWeUseCache()) {
-        if (isThereConnection()) {
-            getBGNCourse('USD').then((r) => {
-                appSettings.setNumber("USD", r.rates.BGN);
-                getBGNCourse('EUR').then((r) => {
-                    appSettings.setNumber("EUR", r.rates.BGN);
-                    appSettings.setString("dateUpdated", new Date().toString());
+        if (!isThereConnection()) {
+            dialogs.alert("No connection! Build in rates will be used !").then(() => {
+                console.log("Build in rates will be used");
+            })
+            return;
+        }
+        else {
+            const promissesForCurrencies = [
+                getBGNCourse('AUD'),
+                getBGNCourse('BGN'),
+                getBGNCourse('BRL'),
+                getBGNCourse('CAD'),
+                getBGNCourse('CHF'),
+                getBGNCourse('USD'),
+                getBGNCourse('EUR')
+            ];
+            Promise.all(promissesForCurrencies).then((currencies) => {
+                const currentCurrency = (appSettings.getString('currency')) ? findShortNameByLongName(appSettings.getString('currency')) : 'BGN';
+                appSettings.setNumber("AUD", currencies[0].rates[currentCurrency]);
+                appSettings.setNumber("BGN", currencies[1].rates[currentCurrency]);
+                appSettings.setNumber("BRL", currencies[2].rates[currentCurrency]);
+                appSettings.setNumber("CAD", currencies[3].rates[currentCurrency]);
+                appSettings.setNumber("CHF", currencies[4].rates[currentCurrency]);
+                appSettings.setNumber("USD", currencies[5].rates[currentCurrency]);
+                appSettings.setNumber("EUR", currencies[6].rates[currentCurrency]);
+                appSettings.setString("dateUpdated", new Date().toString());
 
-                },
-                (e) => {
-                    appSettings.remove("EUR");
-                    appSettings.remove("USD");
-                    dialogs.alert("No connection! Build in rates will be used !").then(() => {
-                        console.log("Build in rates will be used");
-                    })
-                });
-            }
-            , (e) => {
+            },
+            (error) => {
                 appSettings.remove("EUR");
                 appSettings.remove("USD");
                 dialogs.alert("No connection! Build in rates will be used !").then(() => {
                     console.log("Build in rates will be used");
                 })
-            });
-        }
-        else {
-            dialogs.alert("No connection! Build in rates will be used !").then(() => {
-                console.log("Build in rates will be used");
             })
         }
     }
+    
+    addAplicationEvents();
+    if (appSettings.getBoolean("isLaunched")) {
+        return
+    }
+    appSettings.setBoolean("isLaunched", true);
 
     DbManagerInstance.getDbConnection().then(db => {
         const dbPromisesArray = [
@@ -148,6 +158,12 @@ function onCreditsTap(args) {
     page.frame.navigate("pages/credits/credits-page");
 }
 
+function onCurrenciesTap(args) {
+    const button = args.object;
+    const page = button.page;
+    page.frame.navigate("pages/currency/currency-page");
+}
+
 module.exports = {
     onNavigatingTo: onNavigatingTo,
     onNewSpendingTap: onNewSpendingTap,
@@ -157,5 +173,6 @@ module.exports = {
     onAlertsTap: onAlertsTap,
     onAllAlertsTap: onAllAlertsTap,
     onNotificationsTap: onNotificationsTap,
-    onCreditsTap: onCreditsTap
+    onCreditsTap: onCreditsTap,
+    onCurrenciesTap: onCurrenciesTap
 }

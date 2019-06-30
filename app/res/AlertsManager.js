@@ -1,5 +1,5 @@
 const DbManager = require("../db/DbManager")
-const {convertEurosAndDollarsToLevas} = require("../res/Currencies")
+const {convertEurosAndDollarsToLevas, findShortNameByLongName, convertCurrenciesToSelected} = require("../res/Currencies")
 const { convertDate } = require("./helpfulFunctions")
 
 
@@ -17,7 +17,7 @@ function getAllAlerts() {
 
 function getRepeatedAlerts() {
     return new Promise((resolve, reject) => {
-        SQL = "SELECT `label`, `sum`, `interval_as_text` FROM alerts WHERE `repeat` = 1";
+        SQL = "SELECT `label`, `sum`, `interval_as_text`, `currency` FROM alerts WHERE `repeat` = 1";
         const DbManagerInstance = new DbManager();
         DbManagerInstance.getDbConnection().then(db => {
             DbManagerInstance.allQuery(db, SQL, []).then((alerts) => {
@@ -36,10 +36,12 @@ function insertPredefinedAlerts(alerts) {
         alertData.toDate = dateRange.to;
         alertData.sumValue = alerts[i][1];
         alertData.labelsValue = alerts[i][0];
+        alertData.currencyValue = alerts[i][3];
+
         promissesArray.push(
             new Promise((resolve, reject) => {
                 const DbManagerInstance = new DbManager();
-                const SQL = "INSERT INTO alerts( `from`, `to`, `label`, `sum`, `interval_as_text`, `repeat`) VALUES (:from, :to, :label, :sum, :interval_as_text, :repeat)";
+                const SQL = "INSERT INTO alerts( `from`, `to`, `label`, `sum`, `currency`, `interval_as_text`, `repeat`) VALUES (:from, :to, :label, :sum, :currency, :interval_as_text, :repeat)";
                 const PARAMS_ARRAY = [
                     {
                         key: ':from',
@@ -56,6 +58,10 @@ function insertPredefinedAlerts(alerts) {
                     {
                         key: ':sum',
                         value: alertData.sumValue
+                    },
+                    {
+                        key: ':currency',
+                        value: alertData.currencyValue
                     },
                     {
                         key: ':interval_as_text',
@@ -89,7 +95,7 @@ function insertPredefinedAlerts(alerts) {
 
 function getAlertsByDate(date) {
     return new Promise((resolve, reject) => {
-        SQL = "SELECT `from`, `to`, `label`, `sum` FROM alerts WHERE `from` <= '" + date + "' AND `to` >= '" + date + "'";
+        SQL = "SELECT `from`, `to`, `label`, `sum`, `currency` FROM alerts WHERE `from` <= '" + date + "' AND `to` >= '" + date + "'";
         const DbManagerInstance = new DbManager();
         DbManagerInstance.getDbConnection().then(db => {
             DbManagerInstance.allQuery(db, SQL, []).then((alerts) => {
@@ -115,17 +121,32 @@ function shouldShowAlert(alerts, spendingData) {
                 DbManagerInstance.getDbConnection().then(db => {
                     DbManagerInstance.allQuery(db, SQL, []).then((spendings) => {
                         let sum = 0;
-                        this.Euros = 0;  
-                        this.Dollars = 0
-                        this.Levas = 0;
+                        let maxSum = 0;
+                        var currenciesArray = [
+                            {currency: "Australian dollar", sum: 0},
+                            {currency: "Bulgarian lev", sum: 0},
+                            {currency: "Brazilian real", sum: 0},
+                            {currency: "Canadian dollar", sum: 0},
+                            {currency: "Swiss franc", sum: 0},
+                            {currency: "United States dollar", sum: 0},
+                            {currency: "European Euro", sum: 0},
+                        ];
+
+
                         for (let j = 0; j < spendings.length; j++) {
-                            if (!this[spendings[j][1]]) {
-                                this[spendings[j][1]] = 0;
-                            } 
-                            this[spendings[j][1]] += + spendings[j][0];
+                            for(let k = 0; k < currenciesArray.length; k++) {
+                                if (spendings[j][1] == currenciesArray[k].currency) {
+                                    currenciesArray[k].sum += parseFloat(spendings[j][0])
+                                }
+                            }
                         }
-                        this[me.spendingData.currencyValue] +=  + me.spendingData.sumValue;
-                        sum += + convertEurosAndDollarsToLevas(this.Euros, this.Dollars, this.Levas);
+
+                        for(let k = 0; k < currenciesArray.length; k++) {
+                            if (me.spendingData.currencyValue == currenciesArray[k].currency) {
+                                currenciesArray[k].sum += parseFloat(me.spendingData.sumValue)
+                            }
+                        }
+                        sum += + convertCurrenciesToSelected(currenciesArray, alerts[i][4], true);
 
                         if (alerts[i][3] < sum) {
                             reject(alerts[i])

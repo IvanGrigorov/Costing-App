@@ -39,6 +39,15 @@
                     checked="{{ repeated }}"/>
             </StackLayout>
             <StackLayout width="60%" height="300px" orientation="vertical">
+                <Label class="new-spending-item" width="50%" text="Currency: " />
+                <ListPicker 
+                    itemSelected="{{ onItemSelected }}"
+                    loaded="onListPickerLoaded"
+                    items="{{ currencies }}"
+                    selectedValue="{{ currencyValue }}">
+                </ListPicker>
+            </StackLayout>
+            <StackLayout width="60%" height="300px" orientation="vertical">
                 <Label class="new-spending-item" width="50%" text="Label: " />
                 <ListPicker 
                     itemSelected="{{ onItemSelected }}"

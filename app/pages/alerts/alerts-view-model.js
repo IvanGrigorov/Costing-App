@@ -1,4 +1,6 @@
 const { Observable } = require("tns-core-modules/data/observable");
+const { CATEGORIES, CURRENCIES } = require("./../../res/Arrays");
+
 
 class AlertsViewModel extends Observable{
 
@@ -11,10 +13,24 @@ class AlertsViewModel extends Observable{
         this._isPredefinedVisible = "visible";
         this._labelsValue = "None";
         this._labels = ["None"];
+        this._currencyValue = "None";
+        this._currencies = CURRENCIES;
         this._dates = ['None', 'Today', 'This month', 'This Year']
         this._datesValue = 'None';
         this._repeated = false;
         this._sumValue = 0;
+    }
+
+    get currencies() {
+        return this._currencies;
+    }
+
+    get currencyValue() {
+        return this._currencyValue;
+    }
+
+    set currencyValue(value) {
+        this._currencyValue = value;
     }
 
     get switch() {

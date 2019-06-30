@@ -1,0 +1,24 @@
+<Page class="page"
+    navigatingTo="onNavigatingTo"  
+    xmlns="http://schemas.nativescript.org/tns.xsd"
+    xmlns:lv="nativescript-ui-listview">
+
+
+    <ActionBar class="action-bar">
+        <Label class="action-bar-title" text="Labels"></Label>
+    </ActionBar>
+
+    <StackLayout width="100%" height="auto" orientation="vertical" backgroundColor="white">
+        <StackLayout width="100%" orientation="horizontal">
+            <Label class="new-spending-item" width="50%" text="{{ label }}" />
+            <ListPicker width="50%"
+                itemSelected="{{ onItemSelected }}"
+                loaded="onListPickerLoaded"
+                items="{{ currencies }}"
+                selectedValue="{{ currencyValue }}">
+            </ListPicker>
+        </StackLayout>
+        <Button tap='onSubmitItemTap' class="btn btn-primary btn-active" id="button" text="Save!" ></Button>
+    </StackLayout>
+
+</Page>

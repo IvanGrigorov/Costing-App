@@ -20,9 +20,10 @@ function onNavigatingTo(args) {
                 from: alerts[i][1],
                 to: alerts[i][2],
                 sum: alerts[i][4],
-                interval: alerts[i][5],
+                currency: alerts[i][5],
+                interval: alerts[i][6],
                 label: alerts[i][3],
-                repeating: alerts[i][6]
+                repeating: alerts[i][7]
             });
         }
         bindingContext.alerts = alertsArray;

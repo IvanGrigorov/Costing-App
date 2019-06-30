@@ -1,6 +1,7 @@
 const { Observable } = require("tns-core-modules/data/observable");
-const { convertEurosAndDollarsToLevas } = require("./../../res/Currencies");
+const { convertEurosAndDollarsToLevas, convertCurrenciesToSelected } = require("./../../res/Currencies");
 const { convertDate } = require("./../../res/helpfulFunctions")
+const appSettings = require("application-settings");
 
 
 
@@ -19,12 +20,29 @@ class StatisticsViewModel extends Observable{
         this._datesValue = 'None';
         this._datefilteringFunc = undefined;
         this._labelfilteringFunc = undefined;
-
+        this._currency = appSettings.getString('currency');
         this._filteringFunc = undefined;
-
+        this._currenciesArray = [
+            {currency: "Australian dollar", sum: 0},
+            {currency: "Bulgarian lev", sum: 0},
+            {currency: "Brazilian real", sum: 0},
+            {currency: "Canadian dollar", sum: 0},
+            {currency: "Swiss franc", sum: 0},
+            {currency: "United States dollar", sum: 0},
+            {currency: "European Euro", sum: 0},
+        ];
+    }
+    get currenciesArray() {
+        return this._currenciesArray;
     }
 
+    set currenciesArray(value) {
+        this._currenciesArray = value;
+    }
 
+    get currency() {
+        return this._currency;
+    }
     get datefilteringFunc() {
         return this._datefilteringFunc;
     }
@@ -83,6 +101,15 @@ class StatisticsViewModel extends Observable{
         this.maxSumLevas = 0;
         this.maxSumEuros = 0;
         this.maxSumDollars = 0;
+        this.currenciesArray = [
+            {currency: "Australian dollar", sum: 0},
+            {currency: "Bulgarian lev", sum: 0},
+            {currency: "Brazilian real", sum: 0},
+            {currency: "Canadian dollar", sum: 0},
+            {currency: "Swiss franc", sum: 0},
+            {currency: "United States dollar", sum: 0},
+            {currency: "European Euro", sum: 0},
+        ];
     }
     
     get labelsValue() {
@@ -153,7 +180,7 @@ class StatisticsViewModel extends Observable{
         const me = this;
         switch (me.tmpDatesValue) {
             case 'Today': {
-                const formattedDate = this.convertDate(new Date());
+                const formattedDate = convertDate(new Date());
                 if (value.when == formattedDate) {
                     return true;
                 }
@@ -161,13 +188,13 @@ class StatisticsViewModel extends Observable{
             }
             case 'This month': {
                 const date = new Date();
-                const firstDay = this.convertDate(new Date(date.getFullYear(), date.getMonth(), 1));
+                const firstDay = convertDate(new Date(date.getFullYear(), date.getMonth(), 1));
                 return me.filterByDate(me, firstDay, value);
 
             }
             case 'This year': {
                 const date = new Date();
-                const firstDay = this.convertDate(new Date(date.getFullYear(), 0, 1));
+                const firstDay = convertDate(new Date(date.getFullYear(), 0, 1));
                 return me.filterByDate(me, firstDay, value);
 
             }
@@ -212,14 +239,16 @@ class StatisticsViewModel extends Observable{
     }
 
     updateMoney(record) {
-        const currency = record.currency;
-        const varName = 'maxSum' + currency;
-        this[varName] += + record.sum
-        const maxSum = convertEurosAndDollarsToLevas(this.maxSumEuros, this.maxSumDollars, this.maxSumLevas);
+        let maxSum = 0;
+        for(let j = 0; j < this.currenciesArray.length; j++) {
+            if (record.currency == this.currenciesArray[j].currency) {
+                this.currenciesArray[j].sum += parseFloat(record.sum)
+            }
+        }
+        
+        maxSum = convertCurrenciesToSelected(this.currenciesArray);
         this.maxSum = maxSum;
         super.notify({ object: this, eventName: Observable.propertyChangeEvent, propertyName: "maxSum", value: this._maxSum });
-        super.notify({ object: this, eventName: Observable.propertyChangeEvent, propertyName: "maxSumEuros", value: this._maxSumEuros });
-        super.notify({ object: this, eventName: Observable.propertyChangeEvent, propertyName: "maxSumDollars", value: this._maxSumDollars });
     }
 
     get filteringFunc() {
