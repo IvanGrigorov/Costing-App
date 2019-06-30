@@ -153,7 +153,7 @@ class StatisticsViewModel extends Observable{
         const me = this;
         switch (me.tmpDatesValue) {
             case 'Today': {
-                const formattedDate = this.convertDate(new Date());
+                const formattedDate = convertDate(new Date());
                 if (value.when == formattedDate) {
                     return true;
                 }
@@ -161,13 +161,13 @@ class StatisticsViewModel extends Observable{
             }
             case 'This month': {
                 const date = new Date();
-                const firstDay = this.convertDate(new Date(date.getFullYear(), date.getMonth(), 1));
+                const firstDay = convertDate(new Date(date.getFullYear(), date.getMonth(), 1));
                 return me.filterByDate(me, firstDay, value);
 
             }
             case 'This year': {
                 const date = new Date();
-                const firstDay = this.convertDate(new Date(date.getFullYear(), 0, 1));
+                const firstDay = convertDate(new Date(date.getFullYear(), 0, 1));
                 return me.filterByDate(me, firstDay, value);
 
             }
