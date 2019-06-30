@@ -52,9 +52,9 @@ function onSubmitItemTap(args) {
     const button = args.object;
     const page = button.page;
     const bindingContect = page.bindingContext;
-    var regex = RegExp('\\d{2}\/\\d{2}\/\\d{4}', 'g');
+    var regex = RegExp('\\d{4}\/\\d{2}\/\\d{2}', 'g');;
     if (!regex.test(bindingContect.whenValue)) {
-        showDateAlert("Wrong date format ! Please use dd/mm/yyyy");
+        showDateAlert("Wrong date format ! Please use yyyy/mm/dd");
         return;
     }
     if (checkIfFieldsAreEmpty(bindingContect)) {
