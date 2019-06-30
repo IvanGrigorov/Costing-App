@@ -189,13 +189,15 @@ class StatisticsViewModel extends Observable{
             case 'This month': {
                 const date = new Date();
                 const firstDay = convertDate(new Date(date.getFullYear(), date.getMonth(), 1));
-                return me.filterByDate(me, firstDay, value);
+                const lastDay = convertDate(new Date(date.getFullYear(), date.getMonth() + 1, 0));
+                return me.filterByDate(me, firstDay, lastDay, value);
 
             }
             case 'This year': {
                 const date = new Date();
                 const firstDay = convertDate(new Date(date.getFullYear(), 0, 1));
-                return me.filterByDate(me, firstDay, value);
+                const lastDay = convertDate(new Date(new Date().getFullYear(), 11, 31));
+                return me.filterByDate(me, firstDay, lastDay, value);
 
             }
             case 'None': {
@@ -207,8 +209,9 @@ class StatisticsViewModel extends Observable{
         }
     }
 
-    filterByDate(scope, dateAfter, record) {
-        if (record.when > dateAfter) {
+    filterByDate(scope, dateAfter, dayBefore, record) {
+        if (record.when > dateAfter &&
+            record.when < dayBefore) {
             return true;
         }
         return false;
