@@ -37,6 +37,9 @@ function addAplicationEvents() {
 function initApp() {
     const DbManagerInstance = new DbManager(); 
     
+    if (!appSettings.getString('currency')) {
+        appSettings.setString('currency', 'Bulgarian lev');
+    }
 
     if (!shouldWeUseCache()) {
         if (!isThereConnection()) {
@@ -57,6 +60,7 @@ function initApp() {
             ];
             Promise.all(promissesForCurrencies).then((currencies) => {
                 const currentCurrency = (appSettings.getString('currency')) ? findShortNameByLongName(appSettings.getString('currency')) : 'BGN';
+                currencies[6].rates.EUR = 1.0;
                 appSettings.setNumber("AUD", currencies[0].rates[currentCurrency]);
                 appSettings.setNumber("BGN", currencies[1].rates[currentCurrency]);
                 appSettings.setNumber("BRL", currencies[2].rates[currentCurrency]);

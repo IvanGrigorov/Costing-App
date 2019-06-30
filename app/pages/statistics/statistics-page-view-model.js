@@ -210,8 +210,8 @@ class StatisticsViewModel extends Observable{
     }
 
     filterByDate(scope, dateAfter, dayBefore, record) {
-        if (record.when > dateAfter &&
-            record.when < dayBefore) {
+        if (record.when >= dateAfter &&
+            record.when <= dayBefore) {
             return true;
         }
         return false;
