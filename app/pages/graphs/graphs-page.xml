@@ -1,0 +1,42 @@
+<Page class="page"
+    navigatingTo="onNavigatingTo"  
+    xmlns="http://schemas.nativescript.org/tns.xsd"
+    xmlns:chart="nativescript-ui-chart">
+
+    <ActionBar class="action-bar">
+        <Label class="action-bar-title" text="Graphs"></Label>
+    </ActionBar>
+
+    <ScrollView>
+        <StackLayout width="100%" height="auto" orientation="vertical" backgroundColor="white">
+            <StackLayout width="100%" height="auto" orientation="vertical" backgroundColor="white">
+                <StackLayout margin="auto" width="60%" orientation="vertical">
+                    <Label class="new-spending-item" width="100%" text="From:" />
+                    <DatePicker loaded="onDatePickerLoaded" date="{{ fromDate }}"></DatePicker>
+                    <Label class="new-spending-item" width="100%" text="To:" />
+                    <DatePicker loaded="onDatePickerLoaded" date="{{ toDate }}"></DatePicker>
+                </StackLayout>
+            </StackLayout>
+            <Button tap='onGenerateTap' class="btn btn-primary btn-active" id="button" text="Generate!" ></Button>
+            <chart:RadPieChart id="graph" visibility="{{ isChartVisible }}" height="300">
+                <chart:RadPieChart.series>
+                    <chart:PieSeries
+                    selectionMode="None"
+                    items="{{ generationData }}"
+                    outerRadiusFactor="0.8"
+                    valueProperty="amount"
+                    legendLabel="category"
+                    showLabels="true">
+                    </chart:PieSeries>
+                </chart:RadPieChart.series>
+                <chart:RadPieChart.legend>
+                    <chart:RadLegendView
+                    position="Right"
+                    width="110" />
+                </chart:RadPieChart.legend>
+            </chart:RadPieChart>
+        </StackLayout>
+    </ScrollView>
+        
+
+</Page>

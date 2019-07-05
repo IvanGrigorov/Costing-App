@@ -168,6 +168,13 @@ function onCurrenciesTap(args) {
     page.frame.navigate("pages/currency/currency-page");
 }
 
+
+function onGraphsTap(args) {
+    const button = args.object;
+    const page = button.page;
+    page.frame.navigate("pages/graphs/graphs-page");
+}
+
 module.exports = {
     onNavigatingTo: onNavigatingTo,
     onNewSpendingTap: onNewSpendingTap,
@@ -178,5 +185,6 @@ module.exports = {
     onAllAlertsTap: onAllAlertsTap,
     onNotificationsTap: onNotificationsTap,
     onCreditsTap: onCreditsTap,
-    onCurrenciesTap: onCurrenciesTap
+    onCurrenciesTap: onCurrenciesTap,
+    onGraphsTap: onGraphsTap
 }
