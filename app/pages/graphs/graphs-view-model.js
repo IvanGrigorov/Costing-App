@@ -9,6 +9,15 @@ class NewGraphsModel extends Observable{
         this._toDate = new Date();
         this._isChartVisible =  'visible';
         this._generationData =  new ObservableArray();
+        this._spendings = [];
+    }
+
+    get spendings() {
+        return this._spendings;
+    }
+
+    set spendings(value) {
+        this._spendings = value;
     }
 
     get fromDate() {
@@ -41,6 +50,28 @@ class NewGraphsModel extends Observable{
 
     set generationData(value) {
         this._generationData = value;
+    }
+
+    pushspending(value) {
+        const img = this.getImageLink(value[1]);
+        this._spendings.push({
+            for: value[0],
+            category: value[1],
+            sum: value[2],
+            currency: value[3],
+            when: value[4],
+            img: img,
+            label: value[5],
+            id: value[6]
+        })
+    }
+
+    getImageLink(category) {
+        if (!category) {
+            return "res://money";
+        }
+        const categoryToLower = category.toLowerCase();
+        return "res://" + categoryToLower;
     }
 }
 

@@ -1,7 +1,8 @@
 <Page class="page"
     navigatingTo="onNavigatingTo"  
     xmlns="http://schemas.nativescript.org/tns.xsd"
-    xmlns:chart="nativescript-ui-chart">
+    xmlns:chart="nativescript-ui-chart"
+    xmlns:lv="nativescript-ui-listview">
 
     <ActionBar class="action-bar">
         <Label class="action-bar-title" text="Graphs"></Label>
@@ -18,10 +19,11 @@
                 </StackLayout>
             </StackLayout>
             <Button tap='onGenerateTap' class="btn btn-primary btn-active" id="button" text="Generate!" ></Button>
-            <chart:RadPieChart id="graph" visibility="{{ isChartVisible }}" height="300">
-                <chart:RadPieChart.series>
+            <chart:RadPieChart pointSelected="onSeriesSelected" pointSelectionMode="Single" id="graph" visibility="{{ isChartVisible }}" height="300">
+                <chart:RadPieChart.series selectionMode="Series">
                     <chart:PieSeries
-                    selectionMode="None"
+
+                    selectionMode="DataPoint"
                     items="{{ generationData }}"
                     outerRadiusFactor="0.8"
                     valueProperty="amount"
@@ -35,6 +37,18 @@
                     width="110" />
                 </chart:RadPieChart.legend>
             </chart:RadPieChart>
+            <lv:RadListView id="list" items="{{ spendings }}" height="100%">
+                <lv:RadListView.itemTemplate>
+                    <StackLayout width="100%" orientation="horizontal" backgroundColor="white">
+                        <Image src="{{ img }}" width="40%"  stretch="aspectFill" class="img-menu"></Image>
+                        <StackLayout width="60%" orientation="vertical" backgroundColor="white">
+                            <Label textWrap="true" class="spending-item"  text="{{ for }}" />
+                            <Label class="spending-item"  text="{{ sum + ' ' + currency }}" />
+                            <Label class="spending-item"  text="{{ when}}" />
+                        </StackLayout>
+                    </StackLayout>
+                </lv:RadListView.itemTemplate>
+            </lv:RadListView>
         </StackLayout>
     </ScrollView>
         

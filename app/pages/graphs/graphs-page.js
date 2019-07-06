@@ -74,7 +74,37 @@ function prepareDataForChart(arrayData) {
     return preparedData;
 }
 
+function getSpendingsFromDateToDateAndCategory(category, from, to, bindingContext, page) {
+    const DbManagerInstance = new DbManager();
+    const SQL_Spending = "SELECT  `for`, `category`, `sum`, `currency`, `when`, `label`, `id` FROM spending WHERE `when` >= '" + from + "' AND `when` <= '" + to + "' AND `category` = '" + category + "'";
+    DbManagerInstance.getDbConnection().then(db => {
+
+        DbManagerInstance.allQuery(db, SQL_Spending, []).then((spendings) => {
+            bindingContext.spendings.splice(0, bindingContext.spendings.length);
+            for (let i = 0; i < spendings.length; i++) {
+                bindingContext.pushspending(spendings[i]);
+            }
+            var list = page.getViewById('list');
+            list.refresh();
+
+        })
+    });
+}
+
+function onSeriesSelected(args) {
+    const chartData = JSON.parse(args.pointData.getDataItem());
+    let category = chartData.category;
+    const button = args.object;
+    const page = button.page;
+    const bindingContext = page.bindingContext;
+    const from = convertDate(bindingContext.fromDate);
+    const to = convertDate(bindingContext.toDate);
+    getSpendingsFromDateToDateAndCategory(category, from, to, bindingContext, page);
+
+}
+
 module.exports = {
     onNavigatingTo: onNavigatingTo,
-    onGenerateTap: onGenerateTap
+    onGenerateTap: onGenerateTap,
+    onSeriesSelected: onSeriesSelected
 }
