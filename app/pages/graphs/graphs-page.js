@@ -40,6 +40,7 @@ function getSpendingsFromDateToDate(from, to, bindingContext, page) {
 
             if (!spendings.length) {
                 graph.visibility = 'hidden';
+                bindingContext.spendings.splice(0, bindingContext.spendings.length);
             }
             else { 
                 graph.visibility = 'visible';
