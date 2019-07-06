@@ -250,7 +250,7 @@ class StatisticsViewModel extends Observable{
         }
         
         maxSum = convertCurrenciesToSelected(this.currenciesArray);
-        this.maxSum = maxSum;
+        this.maxSum = maxSum.toFixed(2);
         super.notify({ object: this, eventName: Observable.propertyChangeEvent, propertyName: "maxSum", value: this._maxSum });
     }
 
