@@ -218,20 +218,25 @@ class StatisticsViewModel extends Observable{
     }
 
     removeItem(id) {
-        this.clearSums();
-        this._spendings = this._spendings.filter((spending) => {
-            if (spending.id != id) {
-                this.updateMoney(spending);
-                return true;
-            }
-            return false;
-        });
-        super.notify({ object: this, eventName: Observable.propertyChangeEvent, propertyName: "spendings", value: this._spendings });
 
+        this.spendings.splice(this.spendings.findIndex((spending) => {
+            return spending.id == id;
+        }), 1);
+        
+        this.clearSums();
+
+        super.notify({ object: this, eventName: Observable.propertyChangeEvent, propertyName: "maxSum", value: this._maxSum });
+
+        if (!this._filteringFunc) {
+            for (let i = 0; i < this.spendings.length; i++) {
+                this.updateMoney(this.spendings[i]);
+            }
+        }
     }
 
     get myfilteringFunc() {
         const me = this;
+        this.clearSums();
         return (value) => {
             if (me.dateFilteringFunc(value) && me.labelFilteringFunc(value)) {
                 this.updateMoney(value);
