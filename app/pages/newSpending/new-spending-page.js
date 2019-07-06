@@ -6,6 +6,7 @@ logic, and to set up your page’s data binding.
 const DbManager = require("../../db/DbManager")
 const NewSpendingViewModel = require("./new-spending-view-model");
 const {getAlertsByDate, shouldShowAlert} = require("./../../res/AlertsManager");
+const { convertDate } = require("./../../res/helpfulFunctions")
 const dialogs = require("tns-core-modules/ui/dialogs");
 
 
@@ -52,11 +53,11 @@ function onSubmitItemTap(args) {
     const button = args.object;
     const page = button.page;
     const bindingContect = page.bindingContext;
-    var regex = RegExp('\\d{4}\/\\d{2}\/\\d{2}', 'g');
-    if (!regex.test(bindingContect.whenValue)) {
-        showDateAlert("Wrong date format ! Please use yyyy/mm/dd");
-        return;
-    }
+    //var regex = RegExp('\\d{4}\/\\d{2}\/\\d{2}', 'g');
+    //if (!regex.test(bindingContect.whenValue)) {
+    //    showDateAlert("Wrong date format ! Please use yyyy/mm/dd");
+    //    return;
+    //}
     if (checkIfFieldsAreEmpty(bindingContect)) {
         showDateAlert("Fields cannot be empty");
         return;
@@ -84,7 +85,7 @@ function onSubmitItemTap(args) {
                 },
                 {
                     key: ':when',
-                    value: bindingContect.whenValue
+                    value: convertDate(bindingContect.whenValue)
                 },
                 {
                     key: ':label',

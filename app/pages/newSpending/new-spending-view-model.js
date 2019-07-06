@@ -1,5 +1,6 @@
 const { Observable } = require("tns-core-modules/data/observable");
 const { CATEGORIES, CURRENCIES } = require("./../../res/Arrays");
+const { convertDate } = require("./../../res/helpfulFunctions")
 
 
 class NewSpendingViewModel extends Observable{
@@ -17,7 +18,7 @@ class NewSpendingViewModel extends Observable{
         this._categoryValue = '';
         this._sumValue = '';
         this._currencyValue = '';
-        this._whenValue = '';
+        this._whenValue = convertDate(new Date());
         this._labels = [];
         this._index = 0;
         this._isLabelOptionVisible = false;
