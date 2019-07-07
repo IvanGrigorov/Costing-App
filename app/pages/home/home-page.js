@@ -43,10 +43,9 @@ function initApp() {
 
     if (!shouldWeUseCache()) {
         if (!isThereConnection()) {
-            dialogs.alert("No connection! Build in rates will be used !").then(() => {
+            dialogs.alert("No connection! Built in rates will be used !").then(() => {
                 //console.log("Build in rates will be used");
             })
-            return;
         }
         else {
             const promissesForCurrencies = [
