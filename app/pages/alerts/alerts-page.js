@@ -76,11 +76,11 @@ function dateRangeSubmit(alertData) {
     DbManagerInstance.getDbConnection().then(db => {
         DbManagerInstance.executeParamQuery(db, SQL, PARAMS_ARRAY).then(() => {
             dialogs.alert("New alert added !").then(() => {
-                console.log("SUCCESSFULL INSERT");
+                //console.log("SUCCESSFULL INSERT");
             })},
             error => {
                 dialogs.alert("New alert not added !").then(() => {
-                    console.log("SOME ERROR", error);
+                    //console.log("SOME ERROR", error);
                 }) 
             }
         );

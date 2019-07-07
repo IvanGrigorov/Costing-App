@@ -69,13 +69,13 @@ function onSubmitItemTap(args) {
                 dialogs.alert("New notification added !").then(() => {
                     scheduleNotification(bindingContext).then(() => {
                         page.frame.navigate("pages/home/home-page");
-                        console.log("SUCCESSFULL INSERT");    
+                        //console.log("SUCCESSFULL INSERT");    
                     })
                 })
             },
             error => {
                 dialogs.alert("There was a problem !").then(() => {
-                    console.log("SOME ERROR", error);
+                    //console.log("SOME ERROR", error);
                 })
             }
         );
@@ -96,7 +96,7 @@ function onSwipeCellStarted(args) {
         if (result) {
             deleteNotification(data, listViewBindingContext, listView);
         }
-        console.log("Dialog result: " + result);
+        //console.log("Dialog result: " + result);
     });
 }
 
@@ -107,7 +107,7 @@ function deleteNotification(data, listViewBindingContext, listView) {
     DbManagerInstance.getDbConnection().then(db => {
         DbManagerInstance.executeQuery(db, SQL).then(() => {
             dialogs.alert("Delete successfull !").then(() => {
-                console.log("SUCCESSFULL DELETE");
+                //console.log("SUCCESSFULL DELETE");
             })
         })
     });

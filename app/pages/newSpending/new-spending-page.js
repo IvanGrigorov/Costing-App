@@ -33,7 +33,7 @@ function onNavigatingTo(args) {
 
 function showDateAlert(msg) {
     dialogs.alert(msg).then(() => {
-        console.log("VALIDATION TEST");
+        //console.log("VALIDATION TEST");
     });
 }
 
@@ -95,11 +95,11 @@ function onSubmitItemTap(args) {
             DbManagerInstance.getDbConnection().then(db => {
                 DbManagerInstance.executeParamQuery(db, SQL, PARAMS_ARRAY).then(() => {
                     dialogs.alert("New spending added !").then(() => {
-                        console.log("SUCCESSFULL INSERT");
+                        //console.log("SUCCESSFULL INSERT");
                     })},
                     error => {
                         dialogs.alert("New spending not added !").then(() => {
-                            console.log("SOME ERROR", error);
+                            //console.log("SOME ERROR", error);
                         }) 
                     }
                 );
@@ -111,7 +111,7 @@ function onSubmitItemTap(args) {
             } 
             msg += " !";
             dialogs.alert(msg).then(() => {
-                console.log("SOME ALERT", error);
+                //console.log("SOME ALERT", error);
             });
         });
     })

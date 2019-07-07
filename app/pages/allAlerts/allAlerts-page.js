@@ -46,7 +46,7 @@ function onSwipeCellStarted(args) {
         if (result) {
             deleteAlert(data, listViewBindingContext, listView);
         }
-        console.log("Dialog result: " + result);
+        //console.log("Dialog result: " + result);
     });
 }
 
@@ -57,7 +57,7 @@ function deleteAlert(data, listViewBindingContext, listView) {
     DbManagerInstance.getDbConnection().then(db => {
         DbManagerInstance.executeQuery(db, SQL).then(() => {
             dialogs.alert("Delete successfull !").then(() => {
-                console.log("SUCCESSFULL DELETE");
+                //console.log("SUCCESSFULL DELETE");
             })
         })
     });

@@ -31,7 +31,7 @@ function onNavigatingTo(args) {
                 page.bindingContext = bindingContext;
             },
             error => {
-                console.log(error);
+                //console.log(error);
             }
         );
     });
@@ -50,7 +50,7 @@ function onDeleteByDateItemTap(args) {
     DbManagerInstance.getDbConnection().then(db => {
         DbManagerInstance.executeQuery(db, SQL).then(() => {
             dialogs.alert("Delete successfull !").then(() => {
-                console.log("SUCCESSFULL DELETE");
+                //console.log("SUCCESSFULL DELETE");
             })
         })
     });
@@ -86,7 +86,7 @@ function onDeleteByLabelItemTap(args) {
     DbManagerInstance.getDbConnection().then(db => {
         DbManagerInstance.executeQuery(db, SQL).then(() => {
             dialogs.alert("Delete successfull !").then(() => {
-                console.log("SUCCESSFULL DELETE");
+                //console.log("SUCCESSFULL DELETE");
             })
         })
     });
@@ -103,7 +103,7 @@ function onDeleteByBothItemTap(args) {
     DbManagerInstance.getDbConnection().then(db => {
         DbManagerInstance.executeQuery(db, SQL).then(() => {
             dialogs.alert("Delete successfull !").then(() => {
-                console.log("SUCCESSFULL DELETE");
+                //console.log("SUCCESSFULL DELETE");
             })
         })
     });
@@ -119,11 +119,11 @@ function onDeleteByDeletedLabelsItemTap() {
         DbManagerInstance.executeQuery(db, SQL).then(
             () => {
                 dialogs.alert("Delete successfull !").then(() => {
-                    console.log("SUCCESSFULL DELETE");
+                    //console.log("SUCCESSFULL DELETE");
                 })
             },
             errors => {
-                console.log(error);
+                //console.log(error);
             }
         )
     });

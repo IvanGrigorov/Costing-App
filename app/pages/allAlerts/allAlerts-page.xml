@@ -16,7 +16,7 @@
                     <Label textWrap="true" class="spending-item"  text="{{ 'From : ' + from }}" />
                     <Label textWrap="true" class="spending-item"  text="{{ 'To : ' + to }}" />
                     <Label class="spending-item"  text="{{ 'Sum : ' + sum }}" />
-                    <Label class="spending-item"  text="{{ 'Currency : ' + currency }}" />
+                    <Label textWrap="true" class="spending-item"  text="{{ 'Currency : ' + currency + '(s)' }}" />
                     <Label class="spending-item"  text="{{ 'Interval : ' + interval }}" />
                     <Label class="spending-item"  text="{{ 'Label : ' + label }}" />
                     <Label class="spending-item"  text="{{ 'Repeating : ' + ((repeating) ? 'Yes' : 'No') }}" />

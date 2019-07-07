@@ -43,7 +43,7 @@
                         <Image src="{{ img }}" width="40%"  stretch="aspectFill" class="img-menu"></Image>
                         <StackLayout width="60%" orientation="vertical" backgroundColor="white">
                             <Label textWrap="true" class="spending-item"  text="{{ for }}" />
-                            <Label class="spending-item"  text="{{ sum + ' ' + currency }}" />
+                            <Label textWrap="true" id="sumLabel" class="spending-item"  text="{{ sum + ' ' + currency + '(s)'}}" />
                             <Label class="spending-item"  text="{{ when}}" />
                         </StackLayout>
                     </StackLayout>

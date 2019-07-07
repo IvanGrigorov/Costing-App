@@ -25,7 +25,7 @@ function onSubmitItemTap(args) {
 
     dialogs.alert("New currency saved !").then(() => {
         page.frame.navigate("pages/home/home-page");
-        console.log("SUCCESSFULL INSERT");
+        //console.log("SUCCESSFULL INSERT");
     })
             
 }
@@ -50,7 +50,7 @@ function onSwipeCellStarted(args) {
                 });
             });
         }
-        console.log("Dialog result: " + result);
+        //console.log("Dialog result: " + result);
     });
 }
 
@@ -62,11 +62,11 @@ function deleteSpendingsWithLabel(data) {
         DbManagerInstance.executeQuery(db, SQL).then(
             () => {
                 dialogs.alert("Delete successfull !").then(() => {
-                    console.log("SUCCESSFULL DELETE");
+                    //console.log("SUCCESSFULL DELETE");
                 })
             },
             error => {
-                console.log(error);
+                //console.log(error);
             }
         )
     });
@@ -82,12 +82,12 @@ function deleteLabel(data, listViewBindingContext, listView) {
                 () => {
                     dialogs.alert("Delete successfull !").then(() => {
                         resolve();
-                        console.log("SUCCESSFULL DELETE");
+                        //console.log("SUCCESSFULL DELETE");
                     });
                 },
                 error => {
                     resolve();
-                    console.log(error);
+                    //console.log(error);
                 }
             )
         });

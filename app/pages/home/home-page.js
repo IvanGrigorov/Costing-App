@@ -44,7 +44,7 @@ function initApp() {
     if (!shouldWeUseCache()) {
         if (!isThereConnection()) {
             dialogs.alert("No connection! Build in rates will be used !").then(() => {
-                console.log("Build in rates will be used");
+                //console.log("Build in rates will be used");
             })
             return;
         }
@@ -75,7 +75,7 @@ function initApp() {
                 appSettings.remove("EUR");
                 appSettings.remove("USD");
                 dialogs.alert("No connection! Build in rates will be used !").then(() => {
-                    console.log("Build in rates will be used");
+                    //console.log("Build in rates will be used");
                 })
             })
         }
@@ -101,13 +101,13 @@ function initApp() {
             if (alerts.length) {
                 const alertsToInsert = insertPredefinedAlerts(alerts);
                 Promise.all(alertsToInsert).then(() => {
-                    console.log("Database created");
-                    console.log("Repeated alerts");
+                    //console.log("Database created");
+                    //console.log("Repeated alerts");
                 })
             }
             else {
-                console.log("Database created");
-                console.log("No repeated alerts");
+                //console.log("Database created");
+                //console.log("No repeated alerts");
             }
         })
     });

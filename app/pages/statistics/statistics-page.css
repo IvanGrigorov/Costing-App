@@ -5,7 +5,7 @@
  * Author: Ivan Grigorov
  * Contact:  ivangrigorov9 at gmail.com
  * -----
- * Last Modified: Tuesday, 18th June 2019 9:19:07 pm
+ * Last Modified: Sunday, 7th July 2019 12:42:54 pm
  * Modified By: Ivan Grigorov
  * -----
  * License: MIT
@@ -25,5 +25,10 @@
 
 .total-amount { 
     padding: 15px;
-    font-size: 15em
+    font-size: 15em;
+}
+
+#sumLabel {
+    font-size: 20em;
+    font-weight: bold;
 }

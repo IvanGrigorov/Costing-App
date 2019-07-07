@@ -49,12 +49,12 @@ function onSubmitItemTap(args) {
         DbManagerInstance.executeParamQuery(db, SQL, PARAMS_ARRAY).then(() => {
                 dialogs.alert("New label added !").then(() => {
                     page.frame.navigate("pages/home/home-page");
-                    console.log("SUCCESSFULL INSERT");
+                    //console.log("SUCCESSFULL INSERT");
                 })
             },
             error => {
                 dialogs.alert("There was a problem !").then(() => {
-                    console.log("SOME ERROR", error);
+                    //console.log("SOME ERROR", error);
                 })
             }
         );
@@ -81,7 +81,7 @@ function onSwipeCellStarted(args) {
                 });
             });
         }
-        console.log("Dialog result: " + result);
+        //console.log("Dialog result: " + result);
     });
 }
 
@@ -93,11 +93,11 @@ function deleteSpendingsWithLabel(data) {
         DbManagerInstance.executeQuery(db, SQL).then(
             () => {
                 dialogs.alert("Delete successfull !").then(() => {
-                    console.log("SUCCESSFULL DELETE");
+                    //console.log("SUCCESSFULL DELETE");
                 })
             },
             error => {
-                console.log(error);
+                //console.log(error);
             }
         )
     });
@@ -113,12 +113,12 @@ function deleteLabel(data, listViewBindingContext, listView) {
                 () => {
                     dialogs.alert("Delete successfull !").then(() => {
                         resolve();
-                        console.log("SUCCESSFULL DELETE");
+                        //console.log("SUCCESSFULL DELETE");
                     });
                 },
                 error => {
                     resolve();
-                    console.log(error);
+                    //console.log(error);
                 }
             )
         });
