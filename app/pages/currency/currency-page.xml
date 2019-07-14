@@ -5,7 +5,7 @@
 
 
     <ActionBar class="action-bar">
-        <Label class="action-bar-title" text="Labels"></Label>
+        <Label class="action-bar-title" text="Currencies"></Label>
     </ActionBar>
 
     <StackLayout width="100%" height="auto" orientation="vertical" backgroundColor="white">

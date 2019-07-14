@@ -15,6 +15,7 @@ const dialogs = require("tns-core-modules/ui/dialogs");
 const { getRepeatedAlerts, insertPredefinedAlerts } = require("./../../res/AlertsManager");
 const application = require("tns-core-modules/application");
 const { convertEurosAndDollarsToLevas, convertCurrenciesToSelected, findShortNameByLongName } = require("./../../res/Currencies");
+const { convertDate } = require("./../../res/helpfulFunctions")
 
 
 
@@ -86,17 +87,14 @@ function initApp() {
     }
     appSettings.setBoolean("isLaunched", true);
 
-    DbManagerInstance.getDbConnection().then(db => {
-        const dbPromisesArray = [
-            DbManagerInstance.executeQuery(db, CREATE_SPENDINGS_TABLE),
-            DbManagerInstance.executeQuery(db, CREATE_LABEL_TABLE),
-            DbManagerInstance.executeQuery(db, CREATE_ALERTS_TABLE),
-            DbManagerInstance.executeQuery(db, CREATE_NOTIFICATIONS_TABLE),
-            getRepeatedAlerts()
+    if (!appSettings.getString("getCurrentSavedDate")) {
+        appSettings.setString("getCurrentSavedDate", convertDate(new Date().toString()));
+    }
 
-        ]
-        Promise.all(dbPromisesArray).then((data) => {
-            const alerts = data[4];
+    if (appSettings.getString("getCurrentSavedDate") != convertDate(new Date().toString())) {
+        getRepeatedAlerts().then((data) => {
+            appSettings.setString("getCurrentSavedDate", convertDate(new Date().toString()));
+            const alerts = data;
             if (alerts.length) {
                 const alertsToInsert = insertPredefinedAlerts(alerts);
                 Promise.all(alertsToInsert).then(() => {
@@ -108,8 +106,28 @@ function initApp() {
                 //console.log("Database created");
                 //console.log("No repeated alerts");
             }
+        });
+    }
+    
+
+    if (appSettings.getBoolean("isStarted")) {
+        return
+    }
+    DbManagerInstance.getDbConnection().then(db => {
+        const dbPromisesArray = [
+            DbManagerInstance.executeQuery(db, CREATE_SPENDINGS_TABLE),
+            DbManagerInstance.executeQuery(db, CREATE_LABEL_TABLE),
+            DbManagerInstance.executeQuery(db, CREATE_ALERTS_TABLE),
+            DbManagerInstance.executeQuery(db, CREATE_NOTIFICATIONS_TABLE),
+
+        ]
+        Promise.all(dbPromisesArray).then((data) => {
+            //console.log(data);
         })
     });
+
+    appSettings.setBoolean("isStarted", true);
+
 }
 
 function onNewSpendingTap(args) {
