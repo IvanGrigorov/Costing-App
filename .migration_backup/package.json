@@ -2,10 +2,10 @@
   "nativescript": {
     "id": "org.nativescript.CostingApp",
     "tns-android": {
-      "version": "6.0.0"
+      "version": "5.4.0"
     },
     "tns-ios": {
-      "version": "6.0.1"
+      "version": "5.4.0"
     }
   },
   "description": "NativeScript Application",
@@ -15,10 +15,10 @@
     "nativescript-local-notifications": "^3.2.2",
     "nativescript-sqlite": "^2.3.3",
     "nativescript-theme-core": "~1.0.4",
-    "nativescript-ui-chart": "5.0.0",
-    "nativescript-ui-listview": "7.0.0",
-    "nativescript-unit-test-runner": "0.7.0",
-    "tns-core-modules": "6.0.1"
+    "nativescript-ui-chart": "^4.0.2",
+    "nativescript-ui-listview": "^6.3.2",
+    "nativescript-unit-test-runner": "^0.6.3",
+    "tns-core-modules": "~5.4.0"
   },
   "devDependencies": {
     "chai": "4.2.0",
@@ -28,7 +28,7 @@
     "karma-nativescript-launcher": "0.4.0",
     "karma-webpack": "3.0.5",
     "mocha": "6.1.4",
-    "nativescript-dev-webpack": "1.0.1"
+    "nativescript-dev-webpack": "~0.24.0"
   },
   "gitHead": "67e1a5d2fe6907c5e775d020e6439df795154f58",
   "readme": "NativeScript Application"

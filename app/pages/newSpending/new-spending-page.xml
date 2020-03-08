@@ -13,7 +13,7 @@
             </StackLayout>
             <StackLayout width="100%" orientation="horizontal">
                 <Label class="new-spending-item" width="40%" text="{{ category }}" />
-                <ListPicker 
+                <ListPicker width="60%"
                     loaded="onListPickerLoaded"
                     items="{{ categories }}"
                     selectedValue="{{ categoryValue }}">
@@ -37,7 +37,7 @@
             </StackLayout>
             <StackLayout visibility="{{ isLabelOptionVisible }}" width="100%" orientation="horizontal">
                 <Label class="new-spending-item" width="40%" text="{{ label }}" />
-                <ListPicker 
+                <ListPicker width="60%"
                     loaded="onListPickerLoaded"
                     items="{{ labels }}"
                     selectedValue="{{ labelValue }}">
